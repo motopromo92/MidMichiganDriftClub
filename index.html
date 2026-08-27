@@ -67,8 +67,12 @@
     .nav-social-menu a::after{display:none}
     .nav-social-menu a:hover{background:var(--teal-dark);color:var(--white)}
     /* HERO PHOTO ROTATOR */
-    .hero-slide{position:absolute;inset:0;background-size:cover;background-position:center 40%;opacity:0;transition:opacity 1.6s ease-in-out;will-change:opacity}
-    .hero-slide.is-active{opacity:1}
+    .hero-slide{position:absolute;inset:0;background-size:cover;background-position:center 40%;opacity:0;z-index:0;transition:opacity 1.6s ease-in-out;will-change:opacity}
+    /* The outgoing slide holds full opacity underneath while the incoming one
+       fades in above it. Without this both sit semi-transparent mid-fade and
+       whatever is behind the rotator ghosts through on every transition. */
+    .hero-slide.is-prev{opacity:1;z-index:1;transition:none}
+    .hero-slide.is-active{opacity:1;z-index:2}
     .hero-dots{position:absolute;bottom:18px;left:50%;transform:translateX(-50%);display:flex;gap:8px;z-index:6}
     .hero-dots button{width:9px;height:9px;padding:0;border:1px solid rgba(255,255,255,0.75);background:transparent;cursor:pointer;transition:background 0.25s}
     .hero-dots button[aria-current="true"]{background:var(--teal-bright);border-color:var(--teal-bright)}
@@ -120,7 +124,8 @@
     }
     .hero-bg{
       position:absolute;inset:0;
-      background-image:url('mmdc_hero.jpg');
+      /* no-JS fallback only; the rotator layers over this */
+      background-image:url('mmdc-hero-1.jpg');
       background-size:cover;background-position:center 40%;
       transform:scale(1.03);
       transition:transform 8s ease;
@@ -636,7 +641,12 @@
        One entry = static image, no rotation. Two or more = crossfade.
        Keep them wide (1600px+) and reasonably compressed.                  */
     const HERO_PHOTOS = [
-      'mmdc_hero.jpg'
+      'mmdc-hero-1.jpg',
+      'mmdc-hero-2.jpg',
+      'mmdc-hero-3.jpg',
+      'mmdc-hero-4.jpg',
+      'mmdc-hero-5.jpg',
+      'mmdc-hero-6.jpg'
     ];
 
     (function initHero(){
@@ -667,12 +677,20 @@
       });
       mount.parentElement.appendChild(dots);
 
+      let prevTimer = null;
       function show(next){
-        slides[idx].classList.remove('is-active');
+        const target = (next + slides.length) % slides.length;
+        if (target === idx) return;
+        const outgoing = slides[idx];
+        slides.forEach(el => el.classList.remove('is-prev'));
+        outgoing.classList.remove('is-active');
+        outgoing.classList.add('is-prev');
         dots.children[idx].setAttribute('aria-current','false');
-        idx = (next + slides.length) % slides.length;
+        idx = target;
         slides[idx].classList.add('is-active');
         dots.children[idx].setAttribute('aria-current','true');
+        clearTimeout(prevTimer);
+        prevTimer = setTimeout(() => outgoing.classList.remove('is-prev'), 1700);
       }
       function start(){ timer = setInterval(() => show(idx + 1), 6000); }
       function restart(){ clearInterval(timer); start(); }
