@@ -73,6 +73,21 @@
     .hero-dots button{width:9px;height:9px;padding:0;border:1px solid rgba(255,255,255,0.75);background:transparent;cursor:pointer;transition:background 0.25s}
     .hero-dots button[aria-current="true"]{background:var(--teal-bright);border-color:var(--teal-bright)}
     @media (prefers-reduced-motion:reduce){.hero-slide{transition:none}}
+    /* Four nav items get tight on small phones - shrink rather than wrap */
+    @media (max-width:420px){
+      .nav-links{gap:0.62rem}
+      .nav-links a{font-size:1rem;letter-spacing:1px}
+      .nav-logo img{height:42px}
+      .nav-social-menu a{font-size:0.95rem}
+    }
+    @media (max-width:340px){
+      .nav-links{gap:0.45rem}
+      .nav-links a{font-size:0.92rem;letter-spacing:0.5px}
+      .nav-logo img{height:36px}
+    }
+    .btn-techbook{margin-top:0.75rem;display:inline-block}
+    .inline-link{color:var(--teal-bright);text-decoration:underline;text-underline-offset:2px}
+    .inline-link:hover{color:var(--teal-light)}
     /* PAGE SWITCHING */
     .page{display:none}
     .page.active{display:block}
@@ -313,6 +328,7 @@
       <ul class="nav-links">
         <li><a id="nav-events" class="active" onclick="showPage('events')">Events</a></li>
         <li><a id="nav-about" onclick="showPage('about')">About</a></li>
+        <li><a href="MMDC-TechInfo.pdf" target="_blank" rel="noopener">Tech Book</a></li>
         <li class="nav-social">
           <a class="nav-social-trigger" role="button" aria-haspopup="true" aria-expanded="false" tabindex="0">Social <span class="caret">&#9662;</span></a>
           <ul class="nav-social-menu">
@@ -482,6 +498,7 @@
       <ul class="footer-links">
         <li><a onclick="showPage('events')">Events</a></li>
         <li><a onclick="showPage('about')">About</a></li>
+        <li><a href="MMDC-TechInfo.pdf" target="_blank" rel="noopener">Tech Book</a></li>
         <li><a href="https://www.facebook.com/mmdc0/" target="_blank" rel="noopener">Facebook</a></li>
         <li><a href="https://www.instagram.com/midmichigandriftclub/" target="_blank" rel="noopener">Instagram</a></li>
         <li><a href="https://www.youtube.com/@MidMichiganDriftClub" target="_blank" rel="noopener">YouTube</a></li>
@@ -533,7 +550,9 @@
           <li>🛠️ Open paddock — wrench alongside other builders</li>
           <li>📅 15 events from March through November</li>
           <li>🤝 A community that actually helps each other improve</li>
+          <li>📖 <a href="MMDC-TechInfo.pdf" target="_blank" rel="noopener" class="inline-link">Read the Tech Book</a> before your first event</li>
         </ul>
+        <a href="MMDC-TechInfo.pdf" target="_blank" rel="noopener" class="btn-audience btn-techbook">📖 Tech Book (PDF) →</a>
         <a href="https://driftmaps.com/organizer/mid-michigan-drift-club/" target="_blank" class="btn-audience btn-audience-dark">Register on DriftMaps →</a>
       </div>
     </div>
@@ -599,6 +618,7 @@
       <ul class="footer-links">
         <li><a onclick="showPage('events')">Events</a></li>
         <li><a onclick="showPage('about')">About</a></li>
+        <li><a href="MMDC-TechInfo.pdf" target="_blank" rel="noopener">Tech Book</a></li>
         <li><a href="https://www.facebook.com/mmdc0/" target="_blank" rel="noopener">Facebook</a></li>
         <li><a href="https://www.instagram.com/midmichigandriftclub/" target="_blank" rel="noopener">Instagram</a></li>
         <li><a href="https://www.youtube.com/@MidMichiganDriftClub" target="_blank" rel="noopener">YouTube</a></li>
