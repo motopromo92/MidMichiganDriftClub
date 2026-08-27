@@ -73,14 +73,15 @@
        whatever is behind the rotator ghosts through on every transition. */
     .hero-slide.is-prev{opacity:1;z-index:1;transition:none}
     .hero-slide.is-active{opacity:1;z-index:2}
-    .hero-dots{position:absolute;bottom:18px;left:50%;transform:translateX(-50%);display:flex;gap:8px;z-index:6}
-    .hero-dots button{width:9px;height:9px;padding:0;border:1px solid rgba(255,255,255,0.75);background:transparent;cursor:pointer;transition:background 0.25s}
-    .hero-dots button[aria-current="true"]{background:var(--teal-bright);border-color:var(--teal-bright)}
+    .hero-dots{position:absolute;bottom:6px;left:50%;transform:translateX(-50%);display:flex;gap:2px;z-index:6}
+        .hero-dots button{width:30px;height:30px;padding:0;border:0;background:transparent;cursor:pointer;position:relative;display:block}
+    .hero-dots button::before{content:'';position:absolute;top:50%;left:50%;width:9px;height:9px;margin:-5px 0 0 -5px;border:1px solid rgba(255,255,255,0.75);transition:background 0.25s,border-color 0.25s}
+    .hero-dots button[aria-current="true"]::before{background:var(--teal-bright);border-color:var(--teal-bright)}
     @media (prefers-reduced-motion:reduce){.hero-slide{transition:none}}
     /* Four nav items get tight on small phones - shrink rather than wrap */
     @media (max-width:420px){
       .nav-links{gap:0.62rem}
-      .nav-links a{font-size:1rem;letter-spacing:1px}
+      .nav-links a{font-size:1rem;letter-spacing:1px;padding:0.55rem 0}
       .nav-logo img{height:42px}
       .nav-social-menu a{font-size:0.95rem}
     }
@@ -89,6 +90,9 @@
       .nav-links a{font-size:0.92rem;letter-spacing:0.5px}
       .nav-logo img{height:36px}
     }
+    /* Footer links sat at a 19px tap height; they are a real navigation
+       surface on a phone, so give them room. */
+    .footer-links a{display:inline-block;padding:0.35rem 0.15rem}
     .btn-techbook{margin-top:0.75rem;display:inline-block}
     .inline-link{color:var(--teal-bright);text-decoration:underline;text-underline-offset:2px}
     .inline-link:hover{color:var(--teal-light)}
@@ -164,8 +168,10 @@
     .events-grid{display:grid;gap:1.25rem}
     .event-card{display:grid;grid-template-columns:72px 1fr;align-items:center;gap:1rem;background:var(--white);border:2px solid rgba(10,22,18,0.1);border-left:6px solid var(--teal);padding:1rem 1.2rem;position:relative;transition:transform 0.2s,box-shadow 0.2s;overflow:hidden}
     .event-card>*:last-child{grid-column:2}
-    .event-card .event-price{display:none}
-    @media(min-width:600px){.event-card{grid-template-columns:90px 1fr auto;gap:1.5rem;padding:1.2rem 1.5rem}.event-card>*:last-child{grid-column:auto}.event-card .event-price{display:block}}
+    /* Prices used to be hidden below 600px, so phone visitors saw an event,
+       a venue and a Get Tickets button but no price at all. */
+    .event-card .event-price{display:block;text-align:left;margin-bottom:0.35rem}
+    @media(min-width:600px){.event-card{grid-template-columns:90px 1fr auto;gap:1.5rem;padding:1.2rem 1.5rem}.event-card>*:last-child{grid-column:auto}.event-card .event-price{text-align:right;margin-bottom:0}}
     .event-card::before{content:'';position:absolute;inset:0;background:repeating-linear-gradient(45deg,transparent 0px,transparent 8px,rgba(10,22,18,0.015) 8px,rgba(10,22,18,0.015) 9px);pointer-events:none}
     .event-card:hover{transform:translateX(4px);box-shadow:-4px 0 0 var(--teal-bright),6px 6px 18px rgba(0,0,0,0.08)}
     .event-card.featured{border-left-color:var(--teal-bright);background:linear-gradient(135deg,#edfaf8,var(--white))}
@@ -188,7 +194,8 @@
     .event-meta .venue{font-family:'Barlow Condensed',sans-serif;font-weight:600;color:var(--teal-dark);font-size:0.85rem}
     .event-price{font-family:'Bebas Neue',sans-serif;font-size:1.1rem;color:var(--smoke);letter-spacing:1px;white-space:nowrap;text-align:right}
     .event-price .price-range{display:block;font-size:0.78rem;color:var(--teal)}
-    .event-action{text-align:right;margin-top:0.3rem}
+    .event-action{text-align:left;margin-top:0.3rem}
+    @media(min-width:600px){.event-action{text-align:right}}
     .btn-ticket{display:inline-block;font-family:'Bebas Neue',sans-serif;font-size:0.9rem;letter-spacing:2px;padding:0.4rem 1rem;background:var(--teal);color:var(--white);text-decoration:none;border:2px solid var(--teal);transition:all 0.2s}
     .btn-ticket:hover{background:var(--white);color:var(--teal)}
     .btn-ticket.tba{background:transparent;color:var(--smoke);border-color:var(--smoke);cursor:default;font-size:0.75rem}
@@ -654,17 +661,29 @@
       const mount = document.getElementById('hero-rotator');
       if (!mount || !HERO_PHOTOS.length) return;
 
+      // Only the first photo gets a background up front. Setting background-image
+      // on the others would make the browser fetch all of them on load -- about
+      // 2.7MB before anyone has scrolled, which is the wrong default on phone
+      // data at a track. The rest are attached just before they are needed.
       HERO_PHOTOS.forEach((src, i) => {
         const el = document.createElement('div');
         el.className = 'hero-slide' + (i === 0 ? ' is-active' : '');
-        el.style.backgroundImage = "url('" + src + "')";
+        el.dataset.src = src;
+        if (i === 0) { el.style.backgroundImage = "url('" + src + "')"; el.dataset.loaded = '1'; }
         mount.appendChild(el);
       });
 
-      if (HERO_PHOTOS.length < 2) return;   // nothing to rotate
+      if (HERO_PHOTOS.length < 2) return;
 
       const slides = Array.from(mount.querySelectorAll('.hero-slide'));
-      let idx = 0, timer = null;
+      let idx = 0, timer = null, prevTimer = null;
+
+      function attach(i){
+        const el = slides[(i + slides.length) % slides.length];
+        if (el.dataset.loaded) return;
+        el.style.backgroundImage = "url('" + el.dataset.src + "')";
+        el.dataset.loaded = '1';
+      }
 
       const dots = document.createElement('div');
       dots.className = 'hero-dots';
@@ -673,15 +692,15 @@
         b.type = 'button';
         b.setAttribute('aria-label', 'Show photo ' + (i + 1));
         b.setAttribute('aria-current', i === 0 ? 'true' : 'false');
-        b.addEventListener('click', () => { show(i); restart(); });
+        b.addEventListener('click', () => { attach(i); show(i); restart(); });
         dots.appendChild(b);
       });
       mount.parentElement.appendChild(dots);
 
-      let prevTimer = null;
       function show(next){
         const target = (next + slides.length) % slides.length;
         if (target === idx) return;
+        attach(target);
         const outgoing = slides[idx];
         slides.forEach(el => el.classList.remove('is-prev'));
         outgoing.classList.remove('is-active');
@@ -690,17 +709,21 @@
         idx = target;
         slides[idx].classList.add('is-active');
         dots.children[idx].setAttribute('aria-current','true');
+        attach(idx + 1);              // stage the next one so its fade is not a blank
         clearTimeout(prevTimer);
         prevTimer = setTimeout(() => outgoing.classList.remove('is-prev'), 1700);
       }
       function start(){ timer = setInterval(() => show(idx + 1), 6000); }
       function restart(){ clearInterval(timer); start(); }
 
-      // preload so the first crossfade is not a flash of empty
-      HERO_PHOTOS.slice(1).forEach(src => { const im = new Image(); im.src = src; });
-
       const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-      if (!reduced) start();
+      if (!reduced) {
+        // Stage photo two only once the page has settled, so it never competes
+        // with the first paint.
+        if (document.readyState === 'complete') setTimeout(() => attach(1), 1200);
+        else window.addEventListener('load', () => setTimeout(() => attach(1), 1200));
+        start();
+      }
       document.addEventListener('visibilitychange', () => {
         if (document.hidden) clearInterval(timer);
         else if (!reduced) restart();
