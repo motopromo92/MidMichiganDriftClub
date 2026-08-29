@@ -104,8 +104,11 @@
        surface on a phone, so give them room. */
     .footer-links a{display:inline-block;padding:0.35rem 0.15rem}
     .btn-techbook{margin-top:0.75rem;display:inline-block}
+    /* teal-bright is for dark panels; on the light sections it washes out */
     .inline-link{color:var(--teal-bright);text-decoration:underline;text-underline-offset:2px}
     .inline-link:hover{color:var(--teal-light)}
+    .about-section .inline-link,.step .inline-link,.kit .inline-link{color:var(--teal-dark);font-weight:700}
+    .about-section .inline-link:hover,.step .inline-link:hover{color:var(--teal)}
     /* FOR DRIVERS PAGE */
     .kit-intro{max-width:70ch}
     .kit-grid{display:grid;gap:1rem;margin-top:1.5rem}
@@ -575,14 +578,12 @@
       <div class="steps">
         <div class="step"><span class="step-n">01</span><span class="step-b"><strong>Read the Tech Book.</strong> It is the rulebook your car gets checked against. Nothing else on this page replaces it.</span></div>
         <div class="step"><span class="step-n">02</span><span class="step-b"><strong>Get the car sorted.</strong> The five things below are what tech actually looks for.</span></div>
-        <div class="step"><span class="step-n">03</span><span class="step-b"><strong>Buy a driver ticket.</strong> Entries are capped and events do sell out &mdash; <strong>every event has a different cap</strong>, some as low as 10 to 15 drivers.</span></div>
+        <div class="step"><span class="step-n">03</span><span class="step-b"><strong><a href="https://driftmaps.com/organizer/mid-michigan-drift-club/" target="_blank" rel="noopener" class="inline-link">Buy a driver ticket</a></strong> &mdash; or check <a onclick="showPage('events')" class="inline-link" style="cursor:pointer;">the schedule</a> first. Entries are capped and events do sell out; <strong>every event has a different cap</strong>, some as low as 10 to 15 drivers.</span></div>
         <div class="step"><span class="step-n">04</span><span class="step-b"><strong>Show up and pass tech.</strong> Bring your crew &mdash; most driver entries include a crew pass.</span></div>
       </div>
 
       <div class="drv-cta">
         <a href="MMDC-TechInfo.pdf" target="_blank" rel="noopener" class="btn btn-primary">&#128214; Read the Tech Book (PDF)</a>
-        <a href="https://driftmaps.com/organizer/mid-michigan-drift-club/" target="_blank" rel="noopener" class="btn btn-outline">Buy a Driver Ticket &rarr;</a>
-        <a onclick="showPage('events')" class="btn btn-outline" style="cursor:pointer;">See the Schedule</a>
       </div>
     </div>
 
