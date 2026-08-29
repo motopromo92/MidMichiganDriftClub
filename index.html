@@ -32,6 +32,11 @@
     body::before{content:'';position:fixed;inset:0;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");pointer-events:none;z-index:1000;opacity:0.4}
     /* NAV */
     header{background-color:var(--black);border-bottom:4px solid var(--teal);position:sticky;top:0;z-index:100}
+    /* iOS Safari paints a band of page above a sticky header while its URL bar
+       overlays the viewport, so content appears to scroll over the nav. Extend
+       the header's own background upward to cover that band. Off-canvas when
+       the page is at rest, so it changes no layout. */
+    header::before{content:'';position:absolute;left:0;right:0;bottom:100%;height:100vh;background-color:var(--black);pointer-events:none}
     nav{max-width:1100px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;padding:0 1.25rem;height:70px}
     .nav-logo{display:flex;align-items:center;gap:0.75rem;text-decoration:none;cursor:pointer}
     .nav-logo img{height:52px;width:auto;mix-blend-mode:lighten;filter:brightness(1.05)}
@@ -572,7 +577,7 @@
       <p class="about-section-label">&#10022; Start Here</p>
       <h2 class="about-section-title">What It Takes To Run With Us</h2>
       <div class="prose kit-intro">
-        <p>Drivers and spectators go through two different processes &mdash; different tickets, different waivers, different requirements. This page is the driver side. <strong>Read the Tech Book before your first event</strong>; everything below is the short version of it.</p>
+        <p>This page is for drivers. The process is short: <strong>read the Tech Book, get the car sorted, buy a ticket, and pass tech on the morning.</strong> Everything below is the quick version &mdash; the Tech Book is the full one, and it is what your car is actually measured against.</p>
       </div>
 
       <div class="steps">
@@ -597,33 +602,33 @@
       <div class="kit-grid">
         <div class="kit">
           <h3>Welded Diff</h3>
-          <span class="kit-spend">Cheap, or free if you can weld</span>
-          <p>Both wheels have to break traction together. Weld it, or run a two-way. If you turn up with a clean diff and a hundred bucks, someone at the track will usually weld it for you.</p>
+          <span class="kit-spend">Roughly $100 &ndash; $500</span>
+          <p>Both wheels have to break traction together. Weld the open diff you have, or run a two-way. Cost depends on whether you pull it yourself and who does the welding.</p>
         </div>
         <div class="kit">
           <h3>Coilovers</h3>
-          <span class="kit-spend">Expect around $1,200 for a good set</span>
-          <p>You can spend less. A $600 set will get you on track and you will feel the difference the first time you push it. Budget properly here before anywhere else.</p>
+          <span class="kit-spend">Roughly $600 &ndash; $1,500</span>
+          <p>Entry to mid range. The cheap end will get you on track; the money buys damping you can actually tune. Budget properly here before anywhere else &mdash; you feel it more than anything else on this list.</p>
         </div>
         <div class="kit">
           <h3>A Seat That Fits You</h3>
-          <span class="kit-spend">Get a bucket &mdash; used is fine</span>
-          <p>It does not need to be new or expensive. It needs to hold you in place and take the right belts. A stock seatbelt with a bucket seat is fine.</p>
+          <span class="kit-spend">Roughly $220 &ndash; $700 new</span>
+          <p>An entry-level racing bucket starts around $220; the range covers most of what a grassroots car needs. Used is fine too. It has to hold you in place and take the right belts. A stock seatbelt with a bucket seat will work.</p>
         </div>
         <div class="kit">
           <h3>A Working Handbrake</h3>
-          <span class="kit-spend">Stock can work &mdash; depends on the car</span>
-          <p>It has to lock the rears while you are sideways. 240s have good factory brakes. E36 and E46 are decent. <strong>E90s need a 4:1 actuator.</strong> A dual-caliper setup is ideal but not required.</p>
+          <span class="kit-spend">Roughly $0 &ndash; $750</span>
+          <p>It has to lock the rears while you are sideways. A dual-caliper setup is ideal but not required &mdash; on some cars the factory handbrake is enough, which is why the low end of that range is zero. Ask us about yours.</p>
         </div>
         <div class="kit">
           <h3>Helmet</h3>
-          <span class="kit-spend">Non-negotiable</span>
-          <p>Check the Tech Book for the current accepted ratings before you buy, so you do not buy twice.</p>
+          <span class="kit-spend">Roughly $150 &ndash; $500</span>
+          <p>Non-negotiable, and the one place not to bargain-hunt blind. Budget Snell SA-rated lids start near $150; a well-known brand runs $340 and up. <strong>Check the Tech Book for the accepted ratings before you buy</strong>, so you do not buy twice.</p>
         </div>
         <div class="kit">
-          <h3>Fire Extinguisher &amp; Mounts</h3>
-          <span class="kit-spend">Mounted, not loose</span>
-          <p>It has to be secured and reachable from the driver&rsquo;s seat. Loose in the footwell does not pass.</p>
+          <h3>Fire Extinguisher &amp; Mount</h3>
+          <span class="kit-spend">Roughly $100 &ndash; $200</span>
+          <p>A 2.5lb extinguisher plus a quick-release mount. It has to be secured and reachable from the driver&rsquo;s seat &mdash; loose in the footwell does not pass.</p>
         </div>
       </div>
 
