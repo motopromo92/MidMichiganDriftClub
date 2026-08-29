@@ -4,19 +4,19 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Bring Your Friends. Wild to See. | Mid Michigan Drift Club | Jackson Speedway</title>
-  <meta name="description" content="Michigan grassroots drift events — Jackson Speedway, Owosso Speedway and Gingerman Raceway. 15 events in 2026: drift days, clinics and Doubletime. Spectator admission varies by event." />
+  <meta name="description" content="Michigan grassroots drift events — Jackson Speedway, Owosso Speedway and Gingerman Raceway. A full season of drift days, clinics, ladies days and Doubletime. Spectator admission varies by event." />
   <meta name="keywords" content="Michigan drift events, drift events Jackson Michigan, mid Michigan drift club, grassroots drifting Michigan, drift club Michigan, Jackson Speedway events, drift day Michigan, watch drifting Michigan, beginner drift clinic Michigan, drift events near me Michigan, things to do Jackson MI, motorsport events Michigan 2026" />
   <meta name="author" content="Mid Michigan Drift Club" />
   <link rel="canonical" href="https://midmichigandriftclub.com/" />
   <meta property="og:type" content="website" />
   <meta property="og:title" content="Bring Your Friends. Wild to See. | Mid Michigan Drift Club" />
-  <meta property="og:description" content="Tire smoke, sideways cars, Michigan's grassroots drift scene. 15 events in 2026 across three Michigan tracks. Check each event for spectator admission." />
+  <meta property="og:description" content="Tire smoke, sideways cars, Michigan's grassroots drift scene. A full season across three Michigan tracks. Check each event for spectator admission." />
   <meta property="og:image" content="https://midmichigandriftclub.com/logo.png" />
   <meta property="og:url" content="https://midmichigandriftclub.com/" />
   <meta property="og:site_name" content="Mid Michigan Drift Club" />
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="Bring Your Friends. Wild to See. | Mid Michigan Drift Club" />
-  <meta name="twitter:description" content="Michigan grassroots drift events at Jackson Speedway, Owosso and Gingerman. 15 events in 2026. Spectator admission varies by event." />
+  <meta name="twitter:description" content="Michigan grassroots drift events at Jackson Speedway, Owosso and Gingerman. Drift days, clinics and ladies days. Spectator admission varies by event." />
   <meta name="twitter:image" content="https://midmichigandriftclub.com/logo.png" />
   <meta name="geo.region" content="US-MI" />
   <meta name="geo.placename" content="Jackson, Michigan" />
@@ -41,10 +41,18 @@
     .nav-logo-text .main span{color:var(--teal-light)}
     .nav-links{display:flex;gap:1.2rem;list-style:none}
     .nav-links a{font-family:'Bebas Neue',sans-serif;font-size:1.2rem;letter-spacing:2px;color:var(--smoke-light);text-decoration:none;position:relative;transition:color 0.2s;cursor:pointer}
-    .nav-links a::after{content:'';position:absolute;bottom:-4px;left:0;width:0;height:2px;background:var(--teal);transition:width 0.25s ease}
+    /* Ray, 8/28: Social sat out of line because only the other items grew an
+       underline on hover. Every item now gets a rule above AND below, so they
+       all behave the same and nothing shifts. */
+    .nav-links a::before,
+    .nav-links a::after{content:'';position:absolute;left:0;width:0;height:2px;background:var(--teal);transition:width 0.25s ease}
+    .nav-links a::before{top:-4px}
+    .nav-links a::after{bottom:-4px}
     .nav-links a:hover{color:var(--teal-bright)}
+    .nav-links a:hover::before,
     .nav-links a:hover::after{width:100%}
     .nav-links a.active{color:var(--teal-bright)}
+    .nav-links a.active::before,
     .nav-links a.active::after{width:100%}
     /* SOCIAL DROPDOWN */
     .nav-social{position:relative}
@@ -52,6 +60,7 @@
     .nav-social-trigger .caret{font-size:0.7rem;transition:transform 0.2s}
     .nav-social.open .nav-social-trigger .caret{transform:rotate(180deg)}
     .nav-social.open .nav-social-trigger{color:var(--teal-bright)}
+    .nav-social.open .nav-social-trigger::before,
     .nav-social.open .nav-social-trigger::after{width:100%}
     .nav-social-menu{
       position:absolute;top:calc(100% + 12px);right:0;min-width:172px;
@@ -64,6 +73,7 @@
     .nav-social.open .nav-social-menu{opacity:1;visibility:visible;transform:translateY(0)}
     .nav-social-menu::before{content:'';position:absolute;top:-8px;right:18px;border:6px solid transparent;border-bottom-color:var(--teal-dark)}
     .nav-social-menu a{display:block;padding:0.5rem 1.1rem;font-size:1.05rem;letter-spacing:2px;color:var(--smoke-light);white-space:nowrap}
+    .nav-social-menu a::before,
     .nav-social-menu a::after{display:none}
     .nav-social-menu a:hover{background:var(--teal-dark);color:var(--white)}
     /* HERO PHOTO ROTATOR */
@@ -96,6 +106,22 @@
     .btn-techbook{margin-top:0.75rem;display:inline-block}
     .inline-link{color:var(--teal-bright);text-decoration:underline;text-underline-offset:2px}
     .inline-link:hover{color:var(--teal-light)}
+    /* FOR DRIVERS PAGE */
+    .kit-intro{max-width:70ch}
+    .kit-grid{display:grid;gap:1rem;margin-top:1.5rem}
+    @media(min-width:760px){.kit-grid{grid-template-columns:1fr 1fr}}
+    .kit{background:var(--white);border:2px solid rgba(10,22,18,0.1);border-left:6px solid var(--teal);padding:1.1rem 1.3rem}
+    .kit h3{font-family:'Bebas Neue',sans-serif;font-size:1.4rem;letter-spacing:2px;color:var(--black);margin-bottom:0.15rem}
+    .kit .kit-spend{font-family:'Barlow Condensed',sans-serif;font-size:0.82rem;font-weight:700;letter-spacing:1px;color:var(--teal-dark);display:block;margin-bottom:0.5rem}
+    .kit p{font-family:'Barlow Condensed',sans-serif;font-size:0.95rem;line-height:1.55;color:#3a4a48}
+    .steps{display:grid;gap:0.6rem;margin-top:1.25rem;counter-reset:step}
+    .step{display:flex;gap:0.9rem;align-items:flex-start;background:var(--white);border:2px solid rgba(10,22,18,0.08);padding:0.85rem 1.1rem}
+    .step-n{font-family:'Bebas Neue',sans-serif;font-size:1.5rem;line-height:1;color:var(--teal);min-width:1.6rem}
+    .step-b{font-family:'Barlow Condensed',sans-serif;font-size:0.98rem;line-height:1.5;color:#3a4a48}
+    .step-b strong{color:var(--black)}
+    .drv-cta{display:flex;flex-wrap:wrap;gap:0.8rem;margin-top:1.5rem}
+    .note-box{background:#edfaf8;border:2px solid rgba(26,148,128,0.3);border-left:6px solid var(--teal);padding:1rem 1.2rem;margin-top:1.5rem;font-family:'Barlow Condensed',sans-serif;font-size:0.95rem;line-height:1.55;color:#2d3d3b}
+    .note-box strong{color:var(--teal-dark)}
     /* PAGE SWITCHING */
     .page{display:none}
     .page.active{display:block}
@@ -278,8 +304,10 @@
     .audience-card.spectator{background:var(--black);border-bottom:2px solid var(--teal-dark)}
     @media(min-width:900px){.audience-card.spectator{border-right:2px solid var(--teal-dark);border-bottom:none}}
     .audience-card.driver{background:#0f1e1a}
-    .audience-tag{font-family:'Special Elite',cursive;font-size:0.7rem;letter-spacing:5px;color:var(--teal-light);margin-bottom:1rem}
-    .audience-card h2{font-family:'Bebas Neue',sans-serif;font-size:clamp(1.8rem,3vw,2.5rem);letter-spacing:2px;color:var(--white);line-height:1.05;margin-bottom:1rem}
+    /* Ray, 8/28: the audience label should be what the eye lands on, with the
+       line underneath it as the subtitle. */
+    .audience-tag{font-family:'Bebas Neue',sans-serif;font-size:clamp(1.9rem,3.2vw,2.7rem);letter-spacing:3px;color:var(--teal-bright);line-height:1.05;margin-bottom:0.35rem}
+    .audience-card h2{font-family:'Special Elite',cursive;font-size:0.95rem;letter-spacing:1px;color:var(--smoke-light);line-height:1.5;margin-bottom:1.25rem;font-weight:400}
     .audience-card p{font-family:'Special Elite',cursive;font-size:0.88rem;line-height:1.85;color:var(--smoke-light);margin-bottom:1.5rem}
     .audience-card p strong{color:var(--teal-bright)}
     .audience-list{list-style:none;margin-bottom:2rem}
@@ -340,7 +368,7 @@
       <ul class="nav-links">
         <li><a id="nav-events" class="active" onclick="showPage('events')">Events</a></li>
         <li><a id="nav-about" onclick="showPage('about')">About</a></li>
-        <li><a href="MMDC-TechInfo.pdf" target="_blank" rel="noopener">Tech Book</a></li>
+        <li><a id="nav-drivers" onclick="showPage('drivers')">For Drivers</a></li>
         <li class="nav-social">
           <a class="nav-social-trigger" role="button" aria-haspopup="true" aria-expanded="false" tabindex="0">Social <span class="caret">&#9662;</span></a>
           <ul class="nav-social-menu">
@@ -363,7 +391,7 @@
         <p class="hero-eyebrow">✦ 2026 Season · Jackson Speedway · Michigan ✦</p>
         <h1 class="hero-title">Mid Michigan<br>Drift Club</h1>
         <p class="hero-sub">MMDC</p>
-        <p class="hero-tagline">Six events left in 2026. Three Michigan tracks.</p>
+        <p class="hero-tagline">Three Michigan tracks. One full season.</p>
         <div class="hero-cta">
           <a href="#events-anchor" class="btn btn-primary">View Schedule</a>
           <a onclick="showPage('about')" class="btn btn-outline" style="cursor:pointer;">New Here? Start Here</a>
@@ -466,7 +494,7 @@
 
       <div class="past-season">
         <h3>Earlier in the 2026 Season</h3>
-        <p class="past-intro">Already run this year — fifteen events in all, from the March clinic through to November, across three Michigan tracks.</p>
+        <p class="past-intro">Already run this year, from the March clinic through to November, across three Michigan tracks.</p>
         <div class="past-grid">
           <div class="past-item"><span class="past-date">Mar 28</span><span>MMDC – March Clinic</span><span class="past-venue">Jackson Speedway</span></div>
           <div class="past-item"><span class="past-date">Apr 11</span><span>Jackson Opening Day</span><span class="past-venue">Jackson Speedway</span></div>
@@ -500,8 +528,8 @@
 
       <div class="seo-blurb">
         <h2>Michigan Grassroots Drift Events — Jackson, Owosso and Gingerman</h2>
-        <p>Mid Michigan Drift Club runs a full grassroots drift season in Michigan, from the March clinic through to mid November — fifteen events in 2026 across three tracks. Whether you're a longtime car enthusiast or just looking for something wild to do on a weekend near Jackson, MI, start with the schedule above. <strong>Admission is not the same at every event.</strong> General admission is <strong>$10, and 12 and under get in free</strong>, with free parking and food on site. Not every date is open to spectators — clinics and some competition days run as drivers-and-crew-only track days. The schedule above says which is which.</p>
-        <p>Our events range from beginner-friendly <strong>drift clinics</strong> to full open competition days, making MMDC the perfect entry point for anyone curious about grassroots motorsport in Michigan. Jackson Speedway sits at 3363 Page Ave in Jackson, MI — easy to reach from Lansing, Ann Arbor, and the greater mid-Michigan area.</p>
+        <p>Mid Michigan Drift Club runs a full grassroots drift season in Michigan, from the March clinic through to mid November, across three tracks. Whether you're a longtime car enthusiast or just looking for something wild to do on a weekend near Jackson, MI, start with the schedule above. <strong>Admission is not the same at every event.</strong> General admission is <strong>$10, and 12 and under get in free</strong>, with free parking and food on site. Not every date is open to spectators — clinics and some competition days run as drivers-and-crew-only track days. The schedule above says which is which.</p>
+        <p>Our events range from beginner-friendly <strong>drift clinics</strong> to full open competition days, making MMDC the perfect entry point for anyone curious about grassroots motorsport in Michigan. Jackson Speedway sits at 3363 Page Ave in Jackson, MI — an easy drive from <strong>Lansing, Ann Arbor, Detroit, Grand Rapids, Kalamazoo, Battle Creek and Flint</strong>, and most of the lower peninsula in between.</p>
       </div>
     </div>
 
@@ -521,6 +549,97 @@
     </footer>
   </div>
 
+  <!-- FOR DRIVERS PAGE -->
+  <div id="page-drivers" class="page">
+    <div class="page-header">
+      <div class="page-header-bg"></div>
+      <div class="page-header-overlay"></div>
+      <p class="eyebrow">&#10022; Get On Track &#10022;</p>
+      <h1>For <span>Drivers</span></h1>
+    </div>
+
+    <div class="about-section">
+      <p class="about-section-label">&#10022; Start Here</p>
+      <h2 class="about-section-title">What It Takes To Run With Us</h2>
+      <div class="prose kit-intro">
+        <p>Drivers and spectators go through two different processes &mdash; different tickets, different waivers, different requirements. This page is the driver side. <strong>Read the Tech Book before your first event</strong>; everything below is the short version of it.</p>
+      </div>
+
+      <div class="steps">
+        <div class="step"><span class="step-n">01</span><span class="step-b"><strong>Read the Tech Book.</strong> It is the rulebook your car gets checked against. Nothing else on this page replaces it.</span></div>
+        <div class="step"><span class="step-n">02</span><span class="step-b"><strong>Get the car sorted.</strong> The five things below are what tech actually looks for.</span></div>
+        <div class="step"><span class="step-n">03</span><span class="step-b"><strong>Buy a driver ticket.</strong> Entries are capped and events do sell out &mdash; <strong>every event has a different cap</strong>, some as low as 10 to 15 drivers.</span></div>
+        <div class="step"><span class="step-n">04</span><span class="step-b"><strong>Show up and pass tech.</strong> Bring your crew &mdash; most driver entries include a crew pass.</span></div>
+      </div>
+
+      <div class="drv-cta">
+        <a href="MMDC-TechInfo.pdf" target="_blank" rel="noopener" class="btn btn-primary">&#128214; Read the Tech Book (PDF)</a>
+        <a href="https://driftmaps.com/organizer/mid-michigan-drift-club/" target="_blank" rel="noopener" class="btn btn-outline">Buy a Driver Ticket &rarr;</a>
+        <a onclick="showPage('events')" class="btn btn-outline" style="cursor:pointer;">See the Schedule</a>
+      </div>
+    </div>
+
+    <div class="about-section">
+      <p class="about-section-label">&#10022; The Short Version</p>
+      <h2 class="about-section-title">Recommended Equipment</h2>
+      <div class="prose kit-intro">
+        <p>What to buy, and roughly what to spend. <strong>This is guidance, not the rulebook</strong> &mdash; the Tech Book is what your car is measured against, and it wins wherever the two differ.</p>
+      </div>
+
+      <div class="kit-grid">
+        <div class="kit">
+          <h3>Welded Diff</h3>
+          <span class="kit-spend">Cheap, or free if you can weld</span>
+          <p>Both wheels have to break traction together. Weld it, or run a two-way. If you turn up with a clean diff and a hundred bucks, someone at the track will usually weld it for you.</p>
+        </div>
+        <div class="kit">
+          <h3>Coilovers</h3>
+          <span class="kit-spend">Expect around $1,200 for a good set</span>
+          <p>You can spend less. A $600 set will get you on track and you will feel the difference the first time you push it. Budget properly here before anywhere else.</p>
+        </div>
+        <div class="kit">
+          <h3>A Seat That Fits You</h3>
+          <span class="kit-spend">Get a bucket &mdash; used is fine</span>
+          <p>It does not need to be new or expensive. It needs to hold you in place and take the right belts. A stock seatbelt with a bucket seat is fine.</p>
+        </div>
+        <div class="kit">
+          <h3>A Working Handbrake</h3>
+          <span class="kit-spend">Stock can work &mdash; depends on the car</span>
+          <p>It has to lock the rears while you are sideways. 240s have good factory brakes. E36 and E46 are decent. <strong>E90s need a 4:1 actuator.</strong> A dual-caliper setup is ideal but not required.</p>
+        </div>
+        <div class="kit">
+          <h3>Helmet</h3>
+          <span class="kit-spend">Non-negotiable</span>
+          <p>Check the Tech Book for the current accepted ratings before you buy, so you do not buy twice.</p>
+        </div>
+        <div class="kit">
+          <h3>Fire Extinguisher &amp; Mounts</h3>
+          <span class="kit-spend">Mounted, not loose</span>
+          <p>It has to be secured and reachable from the driver&rsquo;s seat. Loose in the footwell does not pass.</p>
+        </div>
+      </div>
+
+      <div class="note-box">
+        <strong>Not sure what fits your car?</strong> Ask us. We would rather talk you through it before you spend the money than fail you at tech on the morning &mdash; and we can often get parts through our distributor accounts. Message us on any of the channels in the Social menu.
+      </div>
+    </div>
+
+    <footer>
+      <img src="logo.png" alt="Mid Michigan Drift Club" class="footer-logo-img" onclick="showPage('events')">
+      <p class="footer-tagline">&#10022; MMDC &middot; Jackson Speedway &middot; Michigan &#10022;</p>
+      <ul class="footer-links">
+        <li><a onclick="showPage('events')">Events</a></li>
+        <li><a onclick="showPage('about')">About</a></li>
+        <li><a href="MMDC-TechInfo.pdf" target="_blank" rel="noopener">Tech Book</a></li>
+        <li><a href="https://www.facebook.com/mmdc0/" target="_blank" rel="noopener">Facebook</a></li>
+        <li><a href="https://www.instagram.com/midmichigandriftclub/" target="_blank" rel="noopener">Instagram</a></li>
+        <li><a href="https://www.youtube.com/@MidMichiganDriftClub" target="_blank" rel="noopener">YouTube</a></li>
+        <li><a href="https://discord.gg/YjmYq5kfDn" target="_blank" rel="noopener">Discord</a></li>
+      </ul>
+      <p class="footer-copy">&copy; 2026 Mid Michigan Drift Club &middot; All rights reserved</p>
+    </footer>
+  </div>
+
   <!-- ABOUT PAGE -->
   <div id="page-about" class="page">
     <div class="page-header">
@@ -535,13 +654,13 @@
       <h2 class="about-section-title">Built for the Love of the Slide</h2>
       <div class="prose">
         <p><strong>Mid Michigan Drift Club</strong> is a Michigan grassroots drift community — and we run it the right way. No velvet ropes, no gatekeeping. Just real cars, real drivers, and real people standing at a fence watching something they've never seen this close before.</p>
-        <p>We run a full fifteen-event season, most of it at <strong>Jackson Speedway</strong>, just off Page Ave in Jackson, MI — easy to get to from Lansing, Ann Arbor, or anywhere in between. We also run dates at <strong>Owosso Speedway</strong> in Ovid and <strong>Gingerman Raceway</strong> in South Haven. Whether you're coming to watch for the first time or you've been chasing angle for years, there's a place for you here.</p>
+        <p>We run a full season, most of it at <strong>Jackson Speedway</strong>, just off Page Ave in Jackson, MI — an easy drive from Lansing, Ann Arbor, Detroit, Grand Rapids, Kalamazoo, Battle Creek or Flint. We also run dates at <strong>Owosso Speedway</strong> in Ovid and <strong>Gingerman Raceway</strong> in South Haven. Whether you're coming to watch for the first time or you've been chasing angle for years, there's a place for you here.</p>
       </div>
     </div>
 
     <div class="audience-split">
       <div class="audience-card spectator">
-        <div class="audience-tag">✦ For Spectators ✦</div>
+        <div class="audience-tag">For Spectators</div>
         <h2>You've Never Seen Anything Like This</h2>
         <p>Drifting is the loudest, smokiest, most sideways thing happening in Michigan on a weekend — and it's one of the best-value days out you'll find. At the events we open to the public, <strong>general admission is $10 at the gate and 12 and under get in free.</strong> Walk the paddock, get close to the cars, and watch drivers push the limits in ways that will genuinely surprise you.</p>
         <ul class="audience-list">
@@ -555,19 +674,19 @@
         <a onclick="showPage('events')" class="btn-audience" style="cursor:pointer;">See the 2026 Schedule →</a>
       </div>
       <div class="audience-card driver">
-        <div class="audience-tag">✦ For Drivers ✦</div>
+        <div class="audience-tag">For Drivers</div>
         <h2>Get Your Car Sideways in Michigan</h2>
         <p>From first-time clinic students to seasoned competitors, MMDC events are built to give you seat time in a structured, welcoming environment. Our March Clinic is the perfect on-ramp — and the season gets progressively more competitive from there.</p>
         <ul class="audience-list">
           <li>🔰 Beginner clinics with experienced instruction</li>
           <li>🏎️ Open to all RWD drift builds — no gatekeeping</li>
           <li>🛠️ Open paddock — wrench alongside other builders</li>
-          <li>📅 15 events from March through November</li>
+          <li>📅 A full season, March through November</li>
           <li>🤝 A community that actually helps each other improve</li>
           <li>📖 <a href="MMDC-TechInfo.pdf" target="_blank" rel="noopener" class="inline-link">Read the Tech Book</a> before your first event</li>
         </ul>
         <a href="MMDC-TechInfo.pdf" target="_blank" rel="noopener" class="btn-audience btn-techbook">📖 Tech Book (PDF) →</a>
-        <a href="https://driftmaps.com/organizer/mid-michigan-drift-club/" target="_blank" class="btn-audience btn-audience-dark">Register on DriftMaps →</a>
+        <a onclick="showPage('drivers')" class="btn-audience btn-audience-dark" style="cursor:pointer;">What You Need To Run →</a>
       </div>
     </div>
 
@@ -603,7 +722,7 @@
         <div class="season-icon">📅</div>
         <div class="season-text">
           <div class="season-label">✦ 2026 Season ✦</div>
-          <div class="season-title">Full Season — 15 Events</div>
+          <div class="season-title">Drift Days · Clinics · Ladies Days</div>
           <div class="season-sub">March through November · Jackson · Owosso · Gingerman</div>
         </div>
         <a onclick="showPage('events')" class="btn-season">View Full Schedule</a>
@@ -622,7 +741,7 @@
         <div class="dual-cta-eyebrow">✦ Drivers ✦</div>
         <h2>Come Drive</h2>
         <p>Register for a clinic or event and get your car on track with us.</p>
-        <a href="https://driftmaps.com/organizer/mid-michigan-drift-club/" target="_blank" class="btn btn-outline">Register on DriftMaps</a>
+        <a onclick="showPage('drivers')" class="btn btn-outline" style="cursor:pointer;">What You Need To Run</a>
       </div>
     </div>
 
