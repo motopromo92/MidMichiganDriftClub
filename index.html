@@ -275,6 +275,13 @@
       position:absolute;inset:0;
       background:linear-gradient(to bottom,rgba(10,22,18,0.78) 0%,rgba(10,22,18,0.55) 50%,rgba(10,22,18,0.80) 100%);
     }
+    /* The For Drivers page gets its own photo: a single car with the driver
+       visible, rather than the shared About header. Scoped so About is
+       untouched. Pushed to 60% because the car sits low in the frame. */
+    #page-drivers .page-header-bg{
+      background-image:url('mmdc-hero-5.jpg');
+      background-position:center 60%;
+    }
     .page-header::after{content:'';position:absolute;bottom:0;left:0;right:0;height:14px;background-image:repeating-linear-gradient(90deg,var(--black) 0px,var(--black) 14px,var(--white) 14px,var(--white) 28px);opacity:0.2;z-index:2}
     .page-header img{display:none}
     .page-header .eyebrow{font-family:'Special Elite',cursive;font-size:0.8rem;color:var(--teal-bright);letter-spacing:5px;margin-bottom:0.75rem;position:relative;z-index:3;text-shadow:0 1px 6px rgba(0,0,0,0.6)}
