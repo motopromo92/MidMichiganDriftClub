@@ -228,13 +228,13 @@
     .event-card.featured{border-left-color:var(--teal-bright);background:linear-gradient(135deg,#edfaf8,var(--white))}
     .event-card.weekend{grid-template-columns:90px 1fr;border-left-color:var(--teal-bright);border-top:3px solid var(--teal-bright);background:linear-gradient(135deg,#edfaf8,var(--white));padding:1rem 1.2rem}
     @media(min-width:600px){.event-card.weekend{grid-template-columns:120px 1fr auto;padding:1.5rem}.event-card.weekend>*:last-child{grid-column:auto}}
-    .event-card.weekend .event-date-block{padding:1rem 0.6rem;background:linear-gradient(160deg,var(--teal-dark),var(--black));position:relative}
+    .event-card.weekend .event-date-block{padding:1rem 0.5rem 1.9rem;background:linear-gradient(160deg,var(--teal-dark),var(--black));position:relative}
     .event-card.weekend .event-date-block::after{content:'2-DAY';position:absolute;bottom:0;left:0;right:0;background:var(--teal);font-family:'Bebas Neue',sans-serif;font-size:0.6rem;letter-spacing:2px;color:var(--white);text-align:center;padding:2px 0}
     .event-card.weekend .event-date-block .month{font-size:0.72rem;letter-spacing:3px}
     /* Both dates render at one size and one colour, so "10" no longer dwarfs
        "& 11". Fits the 90px phone box with room to spare. */
-    .event-card.weekend .event-date-block .day{font-size:1.9rem}
-    .event-card.weekend .event-date-block .day-range{font-family:'Bebas Neue',sans-serif;font-size:1.9rem;color:var(--white);letter-spacing:2px;line-height:1.1;margin-bottom:1rem}
+    .event-card.weekend .event-date-block .day{font-size:1.45rem;letter-spacing:1px;white-space:nowrap}
+    @media(min-width:600px){.event-card.weekend .event-date-block .day{font-size:1.95rem}}
     .event-card.weekend .event-name{font-size:1.7rem}
     .event-date-block{text-align:center;background:var(--black);color:var(--white);padding:0.8rem 0.5rem;flex-shrink:0}
     .event-date-block .month{font-family:'Special Elite',cursive;font-size:0.68rem;letter-spacing:3px;color:var(--teal-light);text-transform:uppercase}
@@ -476,7 +476,7 @@
         </div>
 
         <div class="event-card weekend">
-          <div class="event-date-block"><div class="month">Oct</div><div class="day">10</div><div class="day-range">&amp; 11</div></div>
+          <div class="event-date-block"><div class="month">Oct</div><div class="day">10 &amp; 11</div></div>
           <div class="event-info">
             <div class="event-name"><a href="https://driftmaps.com/event/mmdc10102026/" target="_blank" rel="noopener">MMDC – Doubletime</a></div>
             <div class="event-meta"><span class="venue">Jackson Speedway</span> · 3363 Page Ave, Jackson</div>
@@ -558,14 +558,14 @@
         <div class="firsttimer-text">
           <div class="firsttimer-label">✦ Never Been to a Drift Event? ✦</div>
           <h3>You'll wonder why it took you this long.</h3>
-          <p>Real cars. Real drivers. Smoke so thick you can smell it from the parking lot. At the events with general admission it's $10 at the gate, free for age 12 and under, with free parking and food on site. Not every event is open to spectators though — clinics and some private days are drivers and crew only, so check the event details before you set off.</p>
+          <p>Real cars. Real drivers. Smoke so thick you can smell it from the parking lot. At the events with general admission it's $10 at the gate, free for age 12 and under, with food on site &amp; free parking. Not every event is open to spectators though — clinics and some private days are drivers and crew only, so check the event details before you set off.</p>
         </div>
         <a onclick="showPage('about')" class="btn btn-primary" style="cursor:pointer;">What to Expect →</a>
       </div>
 
       <div class="seo-blurb">
         <h2>Michigan Grassroots Drift Events — Jackson, Owosso, and Gingerman</h2>
-        <p>Mid Michigan Drift Club runs a full grassroots drift season in Michigan across three tracks from spring through fall. Whether you're a longtime car enthusiast or just looking for something wild to do on a weekend near Jackson, MI, start with the schedule above. General admission is <strong>$10, and 12 and under get in free</strong>, with free parking and food on site. Some events are run as drivers-and-crew-only track days with no spectators. Check the schedule and event page for details.</p>
+        <p>Mid Michigan Drift Club runs a full grassroots drift season in Michigan across three tracks from spring through fall. Whether you're a longtime car enthusiast or just looking for something wild to do on a weekend near Jackson, MI, start with the schedule above. General admission is <strong>$10, and 12 and under get in free</strong>, with food on site &amp; free parking. Some events are run as drivers-and-crew-only track days with no spectators. Check the schedule and event page for details.</p>
         <p>Our events range from beginner-friendly <strong>drift clinics</strong> to full open competition days, making MMDC the perfect entry point for anyone curious about grassroots motorsport in Michigan. Jackson Speedway sits at 3363 Page Ave in Jackson, MI — an easy drive from <strong>Lansing, Ann Arbor, Detroit, Grand Rapids, Kalamazoo, Battle Creek, and Flint</strong>, and most of the lower peninsula in between.</p>
       </div>
     </div>
@@ -599,7 +599,7 @@
       <p class="about-section-label">&#10022; Start Here &#10022;</p>
       <h2 class="about-section-title">What It Takes To Run With Us</h2>
       <div class="prose kit-intro">
-        <p>This page is for drivers. The process is short: <strong>read the Tech Book, get the car sorted, buy a ticket, and pass tech on the morning.</strong> Everything below is the quick version &mdash; the Tech Book is the full one, and it is what your car is actually measured against.</p>
+        <p>This page is for drivers. The process is short: <strong>read the Tech Book, get the car sorted, buy a ticket, and pass tech.</strong> Everything below is the quick version &mdash; the Tech Book is the full one, and it is what your car is actually measured against.</p>
       </div>
 
       <div class="steps">
