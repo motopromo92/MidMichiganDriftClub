@@ -1,0 +1,353 @@
+:root{--black:#0e1410;--deep:#0a1612;--teal:#1a9480;--teal-dark:#0d6b5c;--teal-light:#26bfa8;--teal-bright:#2ed8be;--smoke:#8a9a98;--smoke-light:#b0bfbd;--white:#ffffff;--off-white:#f8fbfb}
+*{margin:0;padding:0;box-sizing:border-box}
+html{background-color:var(--black)}
+body{background-color:var(--off-white);color:var(--black);font-family:'Barlow Condensed',sans-serif;overflow-x:hidden;overflow-x:clip}
+body::before{content:'';position:fixed;inset:0;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");pointer-events:none;z-index:1000;opacity:0.4}
+/* NAV */
+header{background-color:var(--black);border-bottom:4px solid var(--teal);position:sticky;top:0;z-index:100}
+/* iOS Safari paints a band of page above a sticky header while its URL bar
+   overlays the viewport, so content appears to scroll over the nav. Extend
+   the header's own background upward to cover that band. Off-canvas when
+   the page is at rest, so it changes no layout.
+   This only works while nothing clips it: body must not become a scroll
+   container, which is why overflow-x is clip and not hidden above. */
+header::before{content:'';position:absolute;left:0;right:0;bottom:100%;height:100vh;background-color:var(--black);pointer-events:none}
+nav{max-width:1100px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;padding:0 1.25rem;height:70px}
+.nav-logo{display:flex;align-items:center;gap:0.75rem;text-decoration:none;cursor:pointer}
+.nav-logo img{height:52px;width:auto;mix-blend-mode:lighten;filter:brightness(1.05)}
+.nav-logo-text{display:none;flex-direction:column;line-height:1}
+.nav-logo-text .main{font-family:'Bebas Neue',sans-serif;font-size:1.15rem;letter-spacing:2px;color:var(--white);white-space:nowrap}
+.nav-logo-text .main span{color:var(--teal-light)}
+/* The list spans the nav's full height so the Social dropdown, positioned at
+   top:100% of its <li>, hangs from the bottom of the bar rather than from the
+   bottom of the word. Each item then centres its own link inside that height. */
+.nav-links{display:flex;gap:1.2rem;list-style:none;align-self:stretch}
+.nav-links>li{display:flex;align-items:center}
+.nav-links a{font-family:'Bebas Neue',sans-serif;font-size:1.2rem;letter-spacing:2px;color:var(--smoke-light);text-decoration:none;position:relative;transition:color 0.2s;cursor:pointer}
+/* The Social trigger is inline-flex (it holds a caret); the other three were
+   plain inline. Vertical padding does not grow an inline box's line height but
+   does grow an inline-flex one, so the phone rule below pushed Social ~7px
+   lower than its neighbours. Matching the display type keeps all four on one
+   baseline at every width. Only the top-level items: the dropdown links are
+   grandchildren and stay display:block. */
+.nav-links>li>a{display:inline-flex;align-items:center}
+/* Ray, 8/28: Social sat out of line because only the other items grew an
+   underline on hover. Every item now gets a rule above AND below, so they
+   all behave the same and nothing shifts. */
+.nav-links a::before,
+.nav-links a::after{content:'';position:absolute;left:0;width:0;height:2px;background:var(--teal);transition:width 0.25s ease}
+.nav-links a::before{top:-4px}
+.nav-links a::after{bottom:-4px}
+.nav-links a:hover{color:var(--teal-bright)}
+.nav-links a:hover::before,
+.nav-links a:hover::after{width:100%}
+.nav-links a.active{color:var(--teal-bright)}
+.nav-links a.active::before,
+.nav-links a.active::after{width:100%}
+/* SOCIAL DROPDOWN */
+.nav-social{position:relative}
+.nav-social-trigger{display:inline-flex;align-items:center;gap:4px;cursor:pointer;user-select:none}
+.nav-social-trigger .caret{font-size:0.7rem;transition:transform 0.2s}
+.nav-social.open .nav-social-trigger .caret{transform:rotate(180deg)}
+.nav-social.open .nav-social-trigger{color:var(--teal-bright)}
+.nav-social.open .nav-social-trigger::before,
+.nav-social.open .nav-social-trigger::after{width:100%}
+.nav-social-menu{
+  position:absolute;top:calc(100% + 12px);right:0;min-width:172px;
+  background:var(--black);border:2px solid var(--teal-dark);
+  list-style:none;padding:0.35rem 0;margin:0;z-index:120;
+  opacity:0;visibility:hidden;transform:translateY(-6px);
+  transition:opacity 0.18s ease,transform 0.18s ease,visibility 0.18s;
+  box-shadow:0 10px 26px rgba(0,0,0,0.45);
+}
+.nav-social.open .nav-social-menu{opacity:1;visibility:visible;transform:translateY(0)}
+.nav-social-menu::before{content:'';position:absolute;top:-8px;right:18px;border:6px solid transparent;border-bottom-color:var(--teal-dark)}
+.nav-social-menu a{display:block;padding:0.5rem 1.1rem;font-size:1.05rem;letter-spacing:2px;color:var(--smoke-light);white-space:nowrap}
+.nav-social-menu a::before,
+.nav-social-menu a::after{display:none}
+.nav-social-menu a:hover{background:var(--teal-dark);color:var(--white)}
+/* HERO PHOTO ROTATOR */
+.hero-slide{position:absolute;inset:0;background-size:cover;background-position:center 40%;opacity:0;z-index:0;transition:opacity 1.6s ease-in-out;will-change:opacity}
+/* The outgoing slide holds full opacity underneath while the incoming one
+   fades in above it. Without this both sit semi-transparent mid-fade and
+   whatever is behind the rotator ghosts through on every transition. */
+.hero-slide.is-prev{opacity:1;z-index:1;transition:none}
+.hero-slide.is-active{opacity:1;z-index:2}
+.hero-dots{position:absolute;bottom:6px;left:50%;transform:translateX(-50%);display:flex;gap:2px;z-index:6}
+    .hero-dots button{width:30px;height:30px;padding:0;border:0;background:transparent;cursor:pointer;position:relative;display:block}
+.hero-dots button::before{content:'';position:absolute;top:50%;left:50%;width:9px;height:9px;margin:-5px 0 0 -5px;border:1px solid rgba(255,255,255,0.75);transition:background 0.25s,border-color 0.25s}
+.hero-dots button[aria-current="true"]::before{background:var(--teal-bright);border-color:var(--teal-bright)}
+@media (prefers-reduced-motion:reduce){.hero-slide{transition:none}}
+/* Four nav items get tight on small phones - shrink rather than wrap */
+@media (max-width:420px){
+  .nav-links{gap:0.62rem}
+  .nav-links a{font-size:1rem;letter-spacing:1px;padding:0.55rem 0}
+  .nav-logo img{height:42px}
+  .nav-social-menu a{font-size:0.95rem}
+}
+@media (max-width:340px){
+  .nav-links{gap:0.45rem}
+  .nav-links a{font-size:0.92rem;letter-spacing:0.5px}
+  .nav-logo img{height:36px}
+}
+/* Footer links sat at a 19px tap height; they are a real navigation
+   surface on a phone, so give them room. */
+.footer-links a{display:inline-block;padding:0.35rem 0.15rem}
+.btn-techbook{margin-top:0.75rem;display:inline-block}
+/* teal-bright is for dark panels; on the light sections it washes out */
+.inline-link{color:var(--teal-bright);text-decoration:underline;text-underline-offset:2px}
+.inline-link:hover{color:var(--teal-light)}
+.about-section .inline-link,.step .inline-link,.kit .inline-link{color:var(--teal-dark);font-weight:700}
+.about-section .inline-link:hover,.step .inline-link:hover{color:var(--teal)}
+/* FOR DRIVERS PAGE */
+.kit-intro{max-width:70ch}
+.kit-grid{display:grid;gap:1rem;margin-top:1.5rem}
+@media(min-width:760px){.kit-grid{grid-template-columns:1fr 1fr}}
+.kit{background:var(--white);border:2px solid rgba(10,22,18,0.1);border-left:6px solid var(--teal);padding:1.1rem 1.3rem}
+.kit h3{font-family:'Bebas Neue',sans-serif;font-size:1.4rem;letter-spacing:2px;color:var(--black);margin-bottom:0.15rem}
+.kit .kit-spend{font-family:'Barlow Condensed',sans-serif;font-size:0.82rem;font-weight:700;letter-spacing:1px;color:var(--teal-dark);display:block;margin-bottom:0.5rem}
+.kit p{font-family:'Barlow Condensed',sans-serif;font-size:0.95rem;line-height:1.55;color:#3a4a48}
+.steps{display:grid;gap:0.6rem;margin-top:1.25rem;counter-reset:step}
+.step{display:flex;gap:0.9rem;align-items:flex-start;background:var(--white);border:2px solid rgba(10,22,18,0.08);padding:0.85rem 1.1rem}
+.step-n{font-family:'Bebas Neue',sans-serif;font-size:1.5rem;line-height:1;color:var(--teal);min-width:1.6rem}
+.step-b{font-family:'Barlow Condensed',sans-serif;font-size:0.98rem;line-height:1.5;color:#3a4a48}
+.step-b strong{color:var(--black)}
+.drv-cta{display:flex;flex-wrap:wrap;gap:0.8rem;margin-top:1.5rem}
+.note-box{background:#edfaf8;border:2px solid rgba(26,148,128,0.3);border-left:6px solid var(--teal);padding:1rem 1.2rem;margin-top:1.5rem;font-family:'Barlow Condensed',sans-serif;font-size:0.95rem;line-height:1.55;color:#2d3d3b}
+.note-box strong{color:var(--teal-dark)}
+/* SHARED BUTTONS */
+.btn{display:inline-block;font-family:'Bebas Neue',sans-serif;font-size:1.1rem;letter-spacing:3px;padding:0.75rem 2.2rem;border:2px solid transparent;cursor:pointer;text-decoration:none;transition:all 0.2s}
+.btn-primary{background:var(--teal);color:var(--white);border-color:var(--teal);box-shadow:4px 4px 0 var(--teal-dark)}
+.btn-primary:hover{background:var(--teal-dark);transform:translate(-2px,-2px);box-shadow:6px 6px 0 var(--teal-dark)}
+.btn-outline{background:transparent;color:var(--white);border-color:var(--teal-light);box-shadow:4px 4px 0 rgba(26,148,128,0.3)}
+.btn-outline:hover{background:var(--teal-light);color:var(--black);transform:translate(-2px,-2px)}
+/* SHARED SECTION */
+.section{max-width:1100px;margin:0 auto;padding:3rem 1.25rem}
+.section-label{font-family:'Special Elite',cursive;font-size:0.75rem;color:var(--teal);letter-spacing:6px;margin-bottom:0.5rem}
+.section-title{font-family:'Bebas Neue',sans-serif;font-size:clamp(2.5rem,6vw,4rem);line-height:1;color:var(--black);letter-spacing:3px;margin-bottom:3rem;display:inline-block}
+.section-title::after{content:'';display:block;height:4px;width:60%;background:var(--teal);margin-top:0.4rem}
+/* FOOTER */
+footer{background:var(--black);border-top:4px solid var(--teal);padding:3rem 2rem;text-align:center}
+.footer-logo-img{height:80px;width:auto;mix-blend-mode:lighten;filter:brightness(1.05);margin-bottom:0.75rem;cursor:pointer}
+.footer-tagline{font-family:'Special Elite',cursive;font-size:0.75rem;color:var(--smoke);letter-spacing:3px;margin-bottom:1.5rem}
+.footer-links{display:flex;gap:2rem;justify-content:center;list-style:none;margin-bottom:1.5rem;flex-wrap:wrap}
+.footer-links a{font-family:'Bebas Neue',sans-serif;letter-spacing:2px;color:var(--smoke-light);text-decoration:none;font-size:0.95rem;transition:color 0.2s;cursor:pointer}
+.footer-links a:hover{color:var(--teal-bright)}
+.footer-copy{font-family:'Special Elite',cursive;font-size:0.7rem;color:var(--smoke)}
+/* HERO */
+.hero{
+  position:relative;overflow:hidden;
+  min-height:580px;display:flex;align-items:center;justify-content:center;
+  border-bottom:6px solid var(--teal);
+}
+.hero-bg{
+  position:absolute;inset:0;
+  /* no-JS fallback only; the rotator layers over this */
+  background-image:url('/mmdc-hero-1.webp');
+  background-size:cover;background-position:center 45%;
+  transform:scale(1.03);
+  transition:transform 8s ease;
+}
+.hero.loaded .hero-bg { transform:scale(1); }
+/* dark gradient overlay — heavier at top for text legibility */
+.hero-overlay{
+  position:absolute;inset:0;
+  background:linear-gradient(
+    to bottom,
+    rgba(10,22,18,0.72) 0%,
+    rgba(10,22,18,0.45) 50%,
+    rgba(10,22,18,0.75) 100%
+  );
+}
+.hero-content{text-align:center;z-index:3;padding:2rem;animation:fadeUp 0.8s ease both;display:flex;flex-direction:column;align-items:center}
+@keyframes fadeUp{from{opacity:0;transform:translateY(28px)}to{opacity:1;transform:translateY(0)}}
+.hero-eyebrow{font-family:'Special Elite',cursive;font-size:0.82rem;color:var(--teal-bright);letter-spacing:5px;margin-bottom:0.75rem;text-shadow:0 1px 6px rgba(0,0,0,0.6)}
+.hero-title{font-family:'Bebas Neue',sans-serif;font-size:clamp(3.5rem,10vw,7rem);color:var(--white);letter-spacing:4px;line-height:0.9;text-shadow:3px 3px 0 var(--teal-dark),0 4px 24px rgba(0,0,0,0.5)}
+.hero-sub{font-family:'Bebas Neue',sans-serif;font-size:clamp(1.2rem,3vw,1.8rem);color:var(--teal-light);letter-spacing:8px;margin-top:0.75rem;text-shadow:0 2px 8px rgba(0,0,0,0.5)}
+.hero-cta{margin-top:2.2rem;display:flex;gap:1rem;justify-content:center;flex-wrap:wrap}
+/* SPEC HOOK */
+.spec-hook{display:grid;grid-template-columns:1fr 1fr;gap:0;margin-bottom:2rem;border:2px solid rgba(26,148,128,0.2);border-radius:2px;overflow:hidden}
+.spec-hook-item{display:flex;align-items:flex-start;gap:0.6rem;padding:0.85rem 1rem;background:var(--white);border-right:1px solid rgba(26,148,128,0.15);border-bottom:1px solid rgba(26,148,128,0.15);font-family:'Barlow Condensed',sans-serif;font-size:0.9rem;color:#3a4a48;transition:background 0.2s}
+.spec-hook-item:nth-child(2){border-right:none}
+.spec-hook-item:nth-child(3){border-bottom:none}
+.spec-hook-item:nth-child(4){border-right:none;border-bottom:none}
+.spec-hook-item:hover{background:#edfaf8}
+.spec-hook-item strong{color:var(--teal-dark);display:block;font-size:0.95rem;font-weight:700}
+.spec-hook-item span{line-height:1.3}
+@media(min-width:700px){.spec-hook{grid-template-columns:repeat(4,1fr)}.spec-hook-item{align-items:center;border-bottom:none;border-right:1px solid rgba(26,148,128,0.15)}.spec-hook-item:nth-child(2){border-right:1px solid rgba(26,148,128,0.15)}.spec-hook-item:nth-child(3){border-bottom:none}.spec-hook-item:last-child{border-right:none}}
+/* EVENT CARDS */
+.events-grid{display:grid;gap:1.25rem}
+.event-card{display:grid;grid-template-columns:72px 1fr;align-items:center;gap:1rem;background:var(--white);border:2px solid rgba(10,22,18,0.1);border-left:6px solid var(--teal);padding:1rem 1.2rem;position:relative;transition:transform 0.2s,box-shadow 0.2s;overflow:hidden}
+.event-card>*:last-child{grid-column:2}
+/* Prices used to be hidden below 600px, so phone visitors saw an event,
+   a venue and a Get Tickets button but no price at all. */
+.event-card .event-price{display:block;text-align:left;margin-bottom:0.35rem}
+@media(min-width:600px){.event-card{grid-template-columns:90px 1fr auto;gap:1.5rem;padding:1.2rem 1.5rem}.event-card>*:last-child{grid-column:auto}.event-card .event-price{text-align:right;margin-bottom:0}}
+.event-card::before{content:'';position:absolute;inset:0;background:repeating-linear-gradient(45deg,transparent 0px,transparent 8px,rgba(10,22,18,0.015) 8px,rgba(10,22,18,0.015) 9px);pointer-events:none}
+.event-card:hover{transform:translateX(4px);box-shadow:-4px 0 0 var(--teal-bright),6px 6px 18px rgba(0,0,0,0.08)}
+.event-card.featured{border-left-color:var(--teal-bright);background:linear-gradient(135deg,#edfaf8,var(--white))}
+.event-card.weekend{grid-template-columns:90px 1fr;border-left-color:var(--teal-bright);border-top:3px solid var(--teal-bright);background:linear-gradient(135deg,#edfaf8,var(--white));padding:1rem 1.2rem}
+@media(min-width:600px){.event-card.weekend{grid-template-columns:120px 1fr auto;padding:1.5rem}.event-card.weekend>*:last-child{grid-column:auto}}
+.event-card.weekend .event-date-block{padding:1rem 0.5rem 1.9rem;background:linear-gradient(160deg,var(--teal-dark),var(--black));position:relative}
+.event-card.weekend .event-date-block::after{content:'2-DAY';position:absolute;bottom:0;left:0;right:0;background:var(--teal);font-family:'Bebas Neue',sans-serif;font-size:0.6rem;letter-spacing:2px;color:var(--white);text-align:center;padding:2px 0}
+.event-card.weekend .event-date-block .month{font-size:0.72rem;letter-spacing:3px}
+/* Both dates render at one size and one colour, so "10" no longer dwarfs
+   "& 11". Fits the 90px phone box with room to spare. */
+.event-card.weekend .event-date-block .day{font-size:1.45rem;letter-spacing:1px;white-space:nowrap}
+@media(min-width:600px){.event-card.weekend .event-date-block .day{font-size:1.95rem}}
+.event-card.weekend .event-name{font-size:1.7rem}
+.event-date-block{text-align:center;background:var(--black);color:var(--white);padding:0.8rem 0.5rem;flex-shrink:0}
+.event-date-block .month{font-family:'Special Elite',cursive;font-size:0.68rem;letter-spacing:3px;color:var(--teal-light);text-transform:uppercase}
+.event-date-block .day{font-family:'Bebas Neue',sans-serif;font-size:2.4rem;line-height:1;color:var(--white)}
+.event-date-block .multi{font-family:'Bebas Neue',sans-serif;font-size:0.8rem;color:var(--smoke);letter-spacing:1px}
+.event-info .event-name{font-family:'Bebas Neue',sans-serif;font-size:1.5rem;letter-spacing:2px;color:var(--black);line-height:1.1}
+/* The title is the same DriftMaps link as Get Tickets. Inherit the heading
+   colour and mark it with a rule rather than a default underline. */
+.event-info .event-name a{color:inherit;text-decoration:none;border-bottom:2px solid rgba(26,148,128,0.35);transition:color 0.2s,border-color 0.2s}
+.event-info .event-name a:hover{color:var(--teal-dark);border-bottom-color:var(--teal)}
+.event-meta{font-family:'Special Elite',cursive;font-size:0.78rem;color:var(--smoke);margin-top:0.35rem;letter-spacing:1px}
+.event-meta .venue{font-family:'Barlow Condensed',sans-serif;font-weight:600;color:var(--teal-dark);font-size:0.85rem}
+.event-price{font-family:'Bebas Neue',sans-serif;font-size:1.1rem;color:var(--smoke);letter-spacing:1px;white-space:nowrap;text-align:right}
+.event-price .price-range{display:block;font-size:0.78rem;color:var(--teal)}
+.event-action{text-align:left;margin-top:0.3rem}
+@media(min-width:600px){.event-action{text-align:right}}
+.btn-ticket{display:inline-block;font-family:'Bebas Neue',sans-serif;font-size:0.9rem;letter-spacing:2px;padding:0.4rem 1rem;background:var(--teal);color:var(--white);text-decoration:none;border:2px solid var(--teal);transition:all 0.2s}
+.btn-ticket:hover{background:var(--white);color:var(--teal)}
+.btn-ticket.tba{background:transparent;color:var(--smoke);border-color:var(--smoke);cursor:default;font-size:0.75rem}
+/* Sep 6 clinic sold out on DriftMaps. Rendered as a span, not a link, so
+   the hover state has to be cancelled or it still looks pressable. */
+.btn-ticket.soldout{background:#e8ecec;color:#5a6a68;border-color:rgba(10,22,18,0.22);cursor:default}
+.btn-ticket.soldout:hover{background:#e8ecec;color:#5a6a68}
+.event-spec{display:inline-block;font-family:'Barlow Condensed',sans-serif;font-size:0.78rem;font-weight:600;letter-spacing:0.5px;margin-top:0.45rem;padding:2px 8px;border-radius:2px;line-height:1.35}
+.event-spec.open{background:#e6f7f4;color:var(--teal-dark);border:1px solid rgba(26,148,128,0.35)}
+.event-spec.none{background:#f1f4f4;color:#5a6a68;border:1px solid rgba(10,22,18,0.16)}
+.event-spec.tbc{background:#fdf6e3;color:#7a5c00;border:1px solid rgba(160,125,0,0.3)}
+/* EARLIER IN THE SEASON */
+.past-season{margin-top:2.75rem;border-top:2px solid rgba(26,148,128,0.2);padding-top:1.6rem}
+.past-season h3{font-family:'Bebas Neue',sans-serif;font-size:1.4rem;letter-spacing:2px;color:var(--black)}
+.past-intro{font-family:'Barlow Condensed',sans-serif;font-size:0.9rem;color:#5a6a68;margin:0.35rem 0 1rem;max-width:60ch}
+.past-grid{display:grid;gap:0.4rem}
+@media(min-width:700px){.past-grid{grid-template-columns:1fr 1fr}}
+.past-item{display:flex;flex-wrap:wrap;gap:0.55rem;align-items:baseline;font-family:'Barlow Condensed',sans-serif;font-size:0.92rem;color:#3a4a48;padding:0.45rem 0.75rem;background:var(--white);border-left:3px solid rgba(26,148,128,0.35)}
+.past-item .past-date{font-family:'Bebas Neue',sans-serif;letter-spacing:1px;color:var(--teal-dark);min-width:76px}
+.past-item .past-venue{color:var(--smoke);font-size:0.82rem}
+/* VENUE CALLOUT */
+.venue-callout{margin-top:3rem;background:var(--black);color:var(--white);padding:1.5rem;display:flex;flex-direction:column;gap:1rem;border-left:6px solid var(--teal-bright)}
+@media(min-width:600px){.venue-callout{flex-direction:row;align-items:center;gap:2rem;padding:1.5rem 2rem}.venue-callout .btn{margin-left:auto}}
+.venue-callout .icon{font-size:2.5rem;flex-shrink:0}
+.venue-callout .venue-name{font-family:'Bebas Neue',sans-serif;font-size:1.6rem;letter-spacing:2px;color:var(--teal-light)}
+.venue-callout .venue-addr{font-family:'Special Elite',cursive;font-size:0.8rem;color:var(--smoke);letter-spacing:2px;margin-top:0.2rem}
+/* FIRST TIMER */
+.firsttimer{margin-top:2.5rem;background:var(--black);border-left:6px solid var(--teal-bright);padding:2rem 1.5rem;display:flex;flex-direction:column;gap:1.5rem;position:relative;overflow:hidden}
+@media(min-width:700px){.firsttimer{flex-direction:row;align-items:center;gap:2.5rem;padding:2rem 2rem 2rem 2.5rem}}
+.firsttimer::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 0% 50%,rgba(26,148,128,0.12) 0%,transparent 60%);pointer-events:none}
+.firsttimer-text{flex:1;min-width:240px;position:relative;z-index:1}
+.firsttimer-label{font-family:'Special Elite',cursive;font-size:0.7rem;color:var(--teal-light);letter-spacing:4px;margin-bottom:0.5rem}
+.firsttimer-text h3{font-family:'Bebas Neue',sans-serif;font-size:clamp(1.5rem,3vw,2.1rem);letter-spacing:2px;color:var(--white);line-height:1.05;margin-bottom:0.5rem}
+.firsttimer-text p{font-family:'Special Elite',cursive;font-size:0.82rem;color:var(--smoke-light);line-height:1.75;letter-spacing:0.5px}
+.firsttimer .btn-primary{position:relative;z-index:1;flex-shrink:0;white-space:nowrap}
+/* SEO BLURB */
+.seo-blurb{margin-top:3rem;padding-top:2.5rem;border-top:2px solid rgba(26,148,128,0.15);max-width:780px}
+.seo-blurb h2{font-family:'Bebas Neue',sans-serif;font-size:1.6rem;letter-spacing:2px;color:var(--black);margin-bottom:1rem}
+.seo-blurb p{font-family:'Special Elite',cursive;font-size:0.88rem;line-height:1.9;color:#3a4a48;margin-bottom:0.8rem}
+.seo-blurb strong{color:var(--teal-dark)}
+/* ABOUT / DRIVERS PAGE HEADER */
+.page-header{
+  position:relative;overflow:hidden;
+  min-height:400px;display:flex;flex-direction:column;
+  align-items:center;justify-content:center;
+  border-bottom:6px solid var(--teal);
+  padding:4rem 2rem 3.5rem;text-align:center;
+}
+.page-header-bg{
+  position:absolute;inset:0;
+  background-image:url('/mmdc-hero-1.webp');
+  background-size:cover;background-position:center 45%;
+}
+.page-header-overlay{
+  position:absolute;inset:0;
+  background:linear-gradient(to bottom,rgba(10,22,18,0.78) 0%,rgba(10,22,18,0.55) 50%,rgba(10,22,18,0.80) 100%);
+}
+/* The For Drivers page gets its own photo: a single car with the driver
+   visible, rather than the shared About header. Scoped so About is
+   untouched. Pushed to 60% because the car sits low in the frame. */
+.page-drivers .page-header-bg{
+  background-image:url('/mmdc-hero-5.webp');
+  background-position:center 60%;
+}
+.page-header img{display:none}
+.page-header .eyebrow{font-family:'Special Elite',cursive;font-size:0.8rem;color:var(--teal-bright);letter-spacing:5px;margin-bottom:0.75rem;position:relative;z-index:3;text-shadow:0 1px 6px rgba(0,0,0,0.6)}
+.page-header h1{font-family:'Bebas Neue',sans-serif;font-size:clamp(3rem,9vw,5.5rem);line-height:0.9;color:var(--white);letter-spacing:4px;text-shadow:3px 3px 0 var(--teal-dark),0 4px 24px rgba(0,0,0,0.5);position:relative;z-index:3}
+.page-header h1 span{color:var(--teal-bright)}
+.about-section{max-width:900px;margin:0 auto;padding:3rem 1.25rem}
+.about-section-label{font-family:'Special Elite',cursive;font-size:0.75rem;color:var(--teal);letter-spacing:6px;margin-bottom:0.5rem}
+.about-section-title{font-family:'Bebas Neue',sans-serif;font-size:clamp(2.2rem,5vw,3.5rem);line-height:1;color:var(--black);letter-spacing:3px;margin-bottom:2rem;display:inline-block}
+.about-section-title::after{content:'';display:block;height:4px;width:50%;background:var(--teal);margin-top:0.4rem}
+.prose{font-family:'Special Elite',cursive;font-size:1rem;line-height:1.85;color:#1e2e2c;max-width:700px}
+.prose p+p{margin-top:1.2rem}
+.prose strong{font-family:'Bebas Neue',sans-serif;font-size:1.2em;letter-spacing:2px;color:var(--black)}
+/* PILLARS */
+.pillars{display:grid;grid-template-columns:1fr;gap:1.25rem;margin-top:3rem}
+@media(min-width:600px){.pillars{grid-template-columns:1fr 1fr}}
+@media(min-width:900px){.pillars{grid-template-columns:repeat(3,1fr)}}
+.pillar{background:var(--white);border:2px solid rgba(10,22,18,0.1);border-top:5px solid var(--teal);padding:1.8rem 1.5rem;transition:transform 0.2s,box-shadow 0.2s}
+.pillar:hover{transform:translateY(-4px);box-shadow:0 8px 24px rgba(0,0,0,0.08)}
+.pillar .icon{font-size:2rem;margin-bottom:0.8rem}
+.pillar h3{font-family:'Bebas Neue',sans-serif;font-size:1.3rem;letter-spacing:2px;color:var(--black);margin-bottom:0.5rem}
+.pillar p{font-family:'Special Elite',cursive;font-size:0.82rem;line-height:1.7;color:var(--smoke)}
+/* AUDIENCE SPLIT */
+.audience-split{display:grid;grid-template-columns:1fr;gap:0;border-top:4px solid var(--teal);border-bottom:4px solid var(--teal)}
+@media(min-width:900px){.audience-split{grid-template-columns:1fr 1fr}}
+.audience-card{padding:2.5rem 1.5rem;position:relative}
+@media(min-width:900px){.audience-card{padding:3.5rem 3rem}}
+.audience-card.spectator{background:var(--black);border-bottom:2px solid var(--teal-dark)}
+@media(min-width:900px){.audience-card.spectator{border-right:2px solid var(--teal-dark);border-bottom:none}}
+.audience-card.driver{background:#0f1e1a}
+/* Ray, 8/28: the audience label should be what the eye lands on, with the
+   line underneath it as the subtitle. */
+.audience-tag{font-family:'Bebas Neue',sans-serif;font-size:clamp(1.9rem,3.2vw,2.7rem);letter-spacing:3px;color:var(--teal-bright);line-height:1.05;margin-bottom:0.35rem}
+.audience-card h2{font-family:'Special Elite',cursive;font-size:0.95rem;letter-spacing:1px;color:var(--smoke-light);line-height:1.5;margin-bottom:1.25rem;font-weight:400}
+.audience-card p{font-family:'Special Elite',cursive;font-size:0.88rem;line-height:1.85;color:var(--smoke-light);margin-bottom:1.5rem}
+.audience-card p strong{color:var(--teal-bright)}
+.audience-list{list-style:none;margin-bottom:2rem}
+.audience-list li{font-family:'Barlow Condensed',sans-serif;font-size:1rem;font-weight:600;color:var(--smoke-light);padding:0.45rem 0;border-bottom:1px solid rgba(255,255,255,0.06);letter-spacing:0.5px}
+.audience-list li:last-child{border-bottom:none}
+.btn-audience{display:inline-block;font-family:'Bebas Neue',sans-serif;font-size:1rem;letter-spacing:3px;padding:0.7rem 1.8rem;background:var(--teal);color:var(--white);text-decoration:none;border:2px solid var(--teal);box-shadow:4px 4px 0 var(--teal-dark);transition:all 0.2s}
+.btn-audience:hover{background:var(--teal-dark);transform:translate(-2px,-2px);box-shadow:6px 6px 0 var(--teal-dark)}
+.btn-audience-dark{background:transparent;border-color:var(--teal-light);box-shadow:4px 4px 0 rgba(26,148,128,0.3)}
+.btn-audience-dark:hover{background:var(--teal-light);color:var(--black)}
+/* EXPECT GRID */
+.expect-grid{display:grid;grid-template-columns:1fr;gap:1.25rem;margin-top:2.5rem}
+@media(min-width:480px){.expect-grid{grid-template-columns:1fr 1fr}}
+@media(min-width:900px){.expect-grid{grid-template-columns:repeat(4,1fr)}}
+.expect-card{background:var(--white);border:2px solid rgba(10,22,18,0.1);border-top:none;padding:1.6rem 1.4rem;position:relative;transition:transform 0.2s,box-shadow 0.2s}
+.expect-card::before{content:'';position:absolute;top:0;left:0;right:0;height:4px;background:linear-gradient(90deg,var(--teal),var(--teal-bright))}
+.expect-card:hover{transform:translateY(-4px);box-shadow:0 8px 24px rgba(0,0,0,0.09)}
+.expect-num{font-family:'Bebas Neue',sans-serif;font-size:3rem;line-height:1;color:var(--teal-bright);opacity:0.35;margin-bottom:0.5rem;letter-spacing:2px}
+.expect-card h3{font-family:'Bebas Neue',sans-serif;font-size:1.3rem;letter-spacing:2px;color:var(--black);margin-bottom:0.6rem}
+.expect-card p{font-family:'Special Elite',cursive;font-size:0.82rem;line-height:1.75;color:var(--smoke)}
+/* SEASON BANNER */
+.season-banner{background:var(--black);border-top:4px solid var(--teal);border-bottom:4px solid var(--teal);position:relative;overflow:hidden}
+.season-banner::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 0% 50%,rgba(26,148,128,0.18) 0%,transparent 50%),radial-gradient(ellipse at 100% 50%,rgba(26,148,128,0.12) 0%,transparent 50%);pointer-events:none}
+.season-banner::after{content:'';position:absolute;top:0;left:0;right:0;height:8px;background-image:repeating-linear-gradient(90deg,var(--teal-dark) 0px,var(--teal-dark) 8px,var(--black) 8px,var(--black) 16px);opacity:0.5}
+.season-banner-inner{max-width:1100px;margin:0 auto;padding:2.5rem 2rem;display:flex;align-items:center;gap:2rem;position:relative;z-index:1;flex-wrap:wrap}
+.season-icon{font-size:3rem;flex-shrink:0;filter:drop-shadow(0 0 12px rgba(46,216,190,0.4))}
+.season-text{flex:1;min-width:200px}
+.season-label{font-family:'Special Elite',cursive;font-size:0.72rem;color:var(--teal-light);letter-spacing:5px;margin-bottom:0.3rem}
+.season-title{font-family:'Bebas Neue',sans-serif;font-size:clamp(1.8rem,4vw,2.8rem);letter-spacing:3px;color:var(--white);line-height:1}
+.season-sub{font-family:'Special Elite',cursive;font-size:0.82rem;color:var(--smoke);letter-spacing:2px;margin-top:0.4rem}
+.btn-season{display:inline-block;font-family:'Bebas Neue',sans-serif;font-size:1.05rem;letter-spacing:3px;padding:0.8rem 2rem;background:var(--teal);color:var(--white);border:2px solid var(--teal);text-decoration:none;box-shadow:4px 4px 0 var(--teal-dark);transition:all 0.2s;white-space:nowrap;flex-shrink:0;cursor:pointer}
+.btn-season:hover{background:var(--teal-dark);transform:translate(-2px,-2px);box-shadow:6px 6px 0 var(--teal-dark)}
+/* DUAL CTA */
+.dual-cta{display:grid;grid-template-columns:1fr;background:var(--black);border-top:4px solid var(--teal)}
+@media(min-width:900px){.dual-cta{grid-template-columns:1fr 2px 1fr}}
+.dual-cta-half{padding:3rem 1.5rem;text-align:center;border-bottom:2px solid var(--teal-dark)}
+@media(min-width:900px){.dual-cta-half{padding:4rem 3rem;border-bottom:none}}
+.dual-cta-half:last-child{border-bottom:none}
+.dual-cta-divider{display:none;background:var(--teal-dark);opacity:0.5}
+@media(min-width:900px){.dual-cta-divider{display:block}}
+.dual-cta-eyebrow{font-family:'Special Elite',cursive;font-size:0.72rem;color:var(--teal-light);letter-spacing:5px;margin-bottom:0.8rem}
+.dual-cta-half h2{font-family:'Bebas Neue',sans-serif;font-size:clamp(2.5rem,6vw,4rem);letter-spacing:4px;color:var(--white);line-height:1;margin-bottom:0.8rem}
+.dual-cta-half p{font-family:'Special Elite',cursive;font-size:0.88rem;color:var(--smoke);margin-bottom:2rem;letter-spacing:1px;line-height:1.6}
+/* DESKTOP */
+@media(min-width:900px){nav{padding:0 2rem}.nav-logo-text{display:flex}.nav-links{gap:2.5rem}.section{padding:5rem 2rem}.about-section{padding:5rem 2rem}}
