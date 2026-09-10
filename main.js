@@ -87,42 +87,56 @@ const HERO_PHOTOS = [
   });
 })();
 
-/* ---- SOCIAL DROPDOWN --------------------------------------------------
-   Hover opens it on devices that can hover; tap toggles it on those that
-   cannot. Binding both to the same element makes hover open the menu and
-   the click that follows close it again.                                */
-(function initSocial(){
-  const wrap = document.querySelector('.nav-social');
-  if (!wrap) return;
-  const trigger = wrap.querySelector('.nav-social-trigger');
+/* ---- NAV DROPDOWNS ----------------------------------------------------
+   Hover opens a menu on devices that can hover; tap toggles it on those that
+   cannot. Binding both to the same element makes hover open the menu and the
+   click that follows close it again.
+   Written for any number of menus: opening one closes the others, so two
+   never hang open over each other in a nav this narrow.                   */
+(function initDropdowns(){
+  const wraps = document.querySelectorAll('.nav-dropdown');
+  if (!wraps.length) return;
   const canHover = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+  const menus = [];
 
-  function setOpen(open){
-    wrap.classList.toggle('open', open);
-    trigger.setAttribute('aria-expanded', open ? 'true' : 'false');
-  }
+  wraps.forEach(wrap => {
+    const trigger = wrap.querySelector('.nav-dropdown-trigger');
+    if (!trigger) return;
 
-  if (canHover) {
-    wrap.addEventListener('mouseenter', () => setOpen(true));
-    wrap.addEventListener('mouseleave', () => setOpen(false));
-  }
-
-  // Tap/click always works, including on hover devices where the menu is shut.
-  trigger.addEventListener('click', e => {
-    e.stopPropagation();
-    setOpen(!wrap.classList.contains('open'));
-  });
-
-  trigger.addEventListener('keydown', e => {
-    if (e.key === 'Enter' || e.key === ' ') {
-      e.preventDefault();
-      setOpen(!wrap.classList.contains('open'));
+    function setOpen(open){
+      wrap.classList.toggle('open', open);
+      trigger.setAttribute('aria-expanded', open ? 'true' : 'false');
+      if (open) menus.forEach(m => { if (m.wrap !== wrap) m.setOpen(false); });
     }
+    menus.push({ wrap, setOpen });
+
+    if (canHover) {
+      wrap.addEventListener('mouseenter', () => setOpen(true));
+      wrap.addEventListener('mouseleave', () => setOpen(false));
+    }
+
+    // Tap/click always works, including on hover devices where the menu is shut.
+    trigger.addEventListener('click', e => {
+      e.stopPropagation();
+      setOpen(!wrap.classList.contains('open'));
+    });
+
+    trigger.addEventListener('keydown', e => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        setOpen(!wrap.classList.contains('open'));
+      }
+    });
+
+    wrap.addEventListener('focusout', () => {
+      setTimeout(() => { if (!wrap.contains(document.activeElement)) setOpen(false); }, 0);
+    });
   });
 
-  document.addEventListener('click', e => { if (!wrap.contains(e.target)) setOpen(false); });
-  document.addEventListener('keydown', e => { if (e.key === 'Escape') setOpen(false); });
-  wrap.addEventListener('focusout', () => {
-    setTimeout(() => { if (!wrap.contains(document.activeElement)) setOpen(false); }, 0);
+  document.addEventListener('click', e => {
+    menus.forEach(m => { if (!m.wrap.contains(e.target)) m.setOpen(false); });
+  });
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape') menus.forEach(m => m.setOpen(false));
   });
 })();

@@ -44,15 +44,15 @@ nav{max-width:1100px;margin:0 auto;display:flex;align-items:center;justify-conte
 .nav-links a.active{color:var(--teal-bright)}
 .nav-links a.active::before,
 .nav-links a.active::after{width:100%}
-/* SOCIAL DROPDOWN */
-.nav-social{position:relative}
-.nav-social-trigger{display:inline-flex;align-items:center;gap:4px;cursor:pointer;user-select:none}
-.nav-social-trigger .caret{font-size:0.7rem;transition:transform 0.2s}
-.nav-social.open .nav-social-trigger .caret{transform:rotate(180deg)}
-.nav-social.open .nav-social-trigger{color:var(--teal-bright)}
-.nav-social.open .nav-social-trigger::before,
-.nav-social.open .nav-social-trigger::after{width:100%}
-.nav-social-menu{
+/* NAV DROPDOWNS */
+.nav-dropdown{position:relative}
+.nav-dropdown-trigger{display:inline-flex;align-items:center;gap:4px;cursor:pointer;user-select:none}
+.nav-dropdown-trigger .caret{font-size:0.7rem;transition:transform 0.2s}
+.nav-dropdown.open .nav-dropdown-trigger .caret{transform:rotate(180deg)}
+.nav-dropdown.open .nav-dropdown-trigger{color:var(--teal-bright)}
+.nav-dropdown.open .nav-dropdown-trigger::before,
+.nav-dropdown.open .nav-dropdown-trigger::after{width:100%}
+.nav-dropdown-menu{
   position:absolute;top:calc(100% + 12px);right:0;min-width:172px;
   background:var(--black);border:2px solid var(--teal-dark);
   list-style:none;padding:0.35rem 0;margin:0;z-index:120;
@@ -60,12 +60,14 @@ nav{max-width:1100px;margin:0 auto;display:flex;align-items:center;justify-conte
   transition:opacity 0.18s ease,transform 0.18s ease,visibility 0.18s;
   box-shadow:0 10px 26px rgba(0,0,0,0.45);
 }
-.nav-social.open .nav-social-menu{opacity:1;visibility:visible;transform:translateY(0)}
-.nav-social-menu::before{content:'';position:absolute;top:-8px;right:18px;border:6px solid transparent;border-bottom-color:var(--teal-dark)}
-.nav-social-menu a{display:block;padding:0.5rem 1.1rem;font-size:1.05rem;letter-spacing:2px;color:var(--smoke-light);white-space:nowrap}
-.nav-social-menu a::before,
-.nav-social-menu a::after{display:none}
-.nav-social-menu a:hover{background:var(--teal-dark);color:var(--white)}
+.nav-dropdown.open .nav-dropdown-menu{opacity:1;visibility:visible;transform:translateY(0)}
+.nav-dropdown-menu::before{content:'';position:absolute;top:-8px;right:18px;border:6px solid transparent;border-bottom-color:var(--teal-dark)}
+.nav-dropdown.align-left .nav-dropdown-menu{left:0;right:auto}
+.nav-dropdown.align-left .nav-dropdown-menu::before{left:18px;right:auto}
+.nav-dropdown-menu a{display:block;padding:0.5rem 1.1rem;font-size:1.05rem;letter-spacing:2px;color:var(--smoke-light);white-space:nowrap}
+.nav-dropdown-menu a::before,
+.nav-dropdown-menu a::after{display:none}
+.nav-dropdown-menu a:hover{background:var(--teal-dark);color:var(--white)}
 /* HERO PHOTO ROTATOR */
 .hero-slide{position:absolute;inset:0;background-size:cover;background-position:center 40%;opacity:0;z-index:0;transition:opacity 1.6s ease-in-out;will-change:opacity}
 /* The outgoing slide holds full opacity underneath while the incoming one
@@ -78,12 +80,17 @@ nav{max-width:1100px;margin:0 auto;display:flex;align-items:center;justify-conte
 .hero-dots button::before{content:'';position:absolute;top:50%;left:50%;width:9px;height:9px;margin:-5px 0 0 -5px;border:1px solid rgba(255,255,255,0.75);transition:background 0.25s,border-color 0.25s}
 .hero-dots button[aria-current="true"]::before{background:var(--teal-bright);border-color:var(--teal-bright)}
 @media (prefers-reduced-motion:reduce){.hero-slide{transition:none}}
-/* Four nav items get tight on small phones - shrink rather than wrap */
-@media (max-width:420px){
+/* Four nav items get tight on small phones - shrink rather than wrap.
+   Partners lives inside the About dropdown rather than as a fifth top-level
+   item, which is what keeps this to two steps.
+   The step is 500px, not the 420px it was before the dropdown: the caret on
+   "About" widened the row just enough that a 430pt phone landed in the gap
+   above the old breakpoint with the logo touching the links. */
+@media (max-width:500px){
   .nav-links{gap:0.62rem}
   .nav-links a{font-size:1rem;letter-spacing:1px;padding:0.55rem 0}
   .nav-logo img{height:42px}
-  .nav-social-menu a{font-size:0.95rem}
+  .nav-dropdown-menu a{font-size:0.95rem}
 }
 @media (max-width:340px){
   .nav-links{gap:0.45rem}
@@ -351,3 +358,66 @@ footer{background:var(--black);border-top:4px solid var(--teal);padding:3rem 2re
 .dual-cta-half p{font-family:'Special Elite',cursive;font-size:0.88rem;color:var(--smoke);margin-bottom:2rem;letter-spacing:1px;line-height:1.6}
 /* DESKTOP */
 @media(min-width:900px){nav{padding:0 2rem}.nav-logo-text{display:flex}.nav-links{gap:2.5rem}.section{padding:5rem 2rem}.about-section{padding:5rem 2rem}}
+/* ============================================================
+   PARTNER PAGES — /partnerships/ (public) and /partners/arroyo/ (unlisted)
+   ============================================================ */
+/* Header photos. Partnerships takes the frame with a sponsor's tent in it:
+   it sells the trackside activation better than a bare car does. Arroyo
+   takes the tandem pair, which is what its bracket copy is about. */
+.page-partners .page-header-bg{background-image:url('/mmdc-hero-2.webp');background-position:center 55%}
+.page-arroyo .page-header-bg{background-image:url('/mmdc-hero-4.webp');background-position:center 58%}
+.page-header .sub{font-family:'Bebas Neue',sans-serif;font-size:clamp(1.05rem,2.6vw,1.55rem);color:var(--teal-light);letter-spacing:6px;margin-top:0.9rem;position:relative;z-index:3;text-shadow:0 2px 8px rgba(0,0,0,0.5)}
+.page-header .page-cta{margin-top:2.2rem;display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;position:relative;z-index:3}
+/* An unlisted pitch page says so on its face, so a screenshot passed around
+   in a sponsor thread never reads as a live public page. header::before
+   paints 100vh of black upward to cover the iOS URL-bar band, so this bar
+   has to sit above that to survive. */
+.private-flag{position:relative;z-index:101;background:var(--teal-dark);color:var(--white);text-align:center;font-family:'Bebas Neue',sans-serif;letter-spacing:3px;font-size:0.88rem;line-height:1.35;padding:0.6rem 1rem}
+/* Two-up pillars: .pillars goes to three columns at 900px, which strands a
+   pair. Sections that hold exactly two cards opt out. */
+@media(min-width:900px){.pillars.cols-2{grid-template-columns:1fr 1fr}}
+.pillar ul{list-style:none;margin-top:0.9rem}
+.pillar li{font-family:'Special Elite',cursive;font-size:0.8rem;line-height:1.65;color:var(--smoke);padding:0.55rem 0 0.55rem 1.05rem;border-bottom:1px solid rgba(10,22,18,0.08);position:relative}
+.pillar li::before{content:'';position:absolute;left:0;top:1rem;width:5px;height:5px;background:var(--teal-bright)}
+.pillar li:last-child{border-bottom:none;padding-bottom:0}
+.pillar li strong{display:block;font-family:'Bebas Neue',sans-serif;font-size:1.08em;letter-spacing:1px;color:var(--black);margin-bottom:0.1rem}
+/* STAT ROW */
+.stats-row{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:rgba(10,22,18,0.12);border:1px solid rgba(10,22,18,0.12);margin-top:3rem}
+@media(min-width:760px){.stats-row{grid-template-columns:repeat(4,1fr)}}
+.stat-card{background:var(--white);padding:1.8rem 1rem;text-align:center}
+.stat-num{font-family:'Bebas Neue',sans-serif;font-size:clamp(2.1rem,5vw,3rem);line-height:1;color:var(--teal);letter-spacing:2px}
+.stat-lbl{font-family:'Special Elite',cursive;font-size:0.7rem;letter-spacing:2px;color:var(--smoke);margin-top:0.5rem;line-height:1.45}
+/* PARTNERSHIP TIERS */
+.tier-grid{display:grid;grid-template-columns:1fr;gap:1.25rem;margin-top:3rem}
+@media(min-width:640px){.tier-grid{grid-template-columns:1fr 1fr}}
+@media(min-width:1000px){.tier-grid{grid-template-columns:repeat(4,1fr)}}
+.tier{background:var(--white);border:2px solid rgba(10,22,18,0.1);display:flex;flex-direction:column;transition:transform 0.2s,box-shadow 0.2s}
+.tier:hover{transform:translateY(-4px);box-shadow:0 8px 24px rgba(0,0,0,0.09)}
+.tier-head{background:var(--black);padding:1.1rem 1.3rem;border-bottom:4px solid var(--teal)}
+.tier-name{font-family:'Bebas Neue',sans-serif;font-size:1.6rem;letter-spacing:4px;color:var(--white)}
+/* The tier ladder is carried by the club's own teal ramp rather than literal
+   bronze/silver/gold, which would drop three off-brand metals into a palette
+   that has none. */
+.tier.bronze .tier-head{border-bottom-color:rgba(138,154,152,0.55)}
+.tier.silver .tier-head{border-bottom-color:var(--smoke)}
+.tier.gold .tier-head{border-bottom-color:var(--teal-light)}
+.tier.platinum{border-color:var(--teal-bright)}
+.tier.platinum .tier-head{border-bottom-color:var(--teal-bright)}
+.tier.platinum .tier-name{color:var(--teal-bright)}
+.tier-body{padding:1.3rem;display:flex;flex-direction:column;gap:1.2rem;flex:1}
+.tier-group-label{font-family:'Special Elite',cursive;font-size:0.66rem;letter-spacing:3px;color:var(--teal);margin-bottom:0.4rem}
+.tier-body ul{list-style:none}
+.tier-body li{font-family:'Special Elite',cursive;font-size:0.78rem;line-height:1.65;color:#2d3d3b;padding:0.5rem 0 0.5rem 1rem;position:relative;border-bottom:1px solid rgba(10,22,18,0.07)}
+.tier-body li::before{content:'';position:absolute;left:0;top:0.95rem;width:5px;height:5px;background:var(--teal-bright)}
+.tier-body li:last-child{border-bottom:none;padding-bottom:0}
+/* BENEFIT MATRIX */
+.matrix-wrap{margin-top:3rem;overflow-x:auto;border:2px solid rgba(10,22,18,0.1)}
+.matrix{width:100%;border-collapse:collapse;min-width:660px;background:var(--white)}
+.matrix th,.matrix td{padding:0.85rem 1rem;text-align:left;border-bottom:1px solid rgba(10,22,18,0.08)}
+.matrix thead th{background:var(--black);color:var(--white);font-family:'Bebas Neue',sans-serif;font-size:1.05rem;letter-spacing:2px;border-bottom:4px solid var(--teal)}
+.matrix tbody td{font-family:'Barlow Condensed',sans-serif;font-size:0.98rem;color:#2d3d3b}
+.matrix tbody tr:nth-child(even) td{background:#f4f9f8}
+.matrix tbody tr:last-child td{border-bottom:none}
+.matrix .center{text-align:center}
+.matrix .yes{color:var(--teal);font-size:1.15rem}
+.matrix .no{color:rgba(10,22,18,0.25)}
