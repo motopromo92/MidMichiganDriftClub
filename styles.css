@@ -86,15 +86,19 @@ nav{max-width:1100px;margin:0 auto;display:flex;align-items:center;justify-conte
    The step is 500px, not the 420px it was before the dropdown: the caret on
    "About" widened the row just enough that a 430pt phone landed in the gap
    above the old breakpoint with the logo touching the links. */
+/* Scoped to top-level links with >li>a rather than a bare `.nav-links a`.
+   The descendant form also matched the links inside a dropdown menu and, sitting
+   later in the file at equal specificity, flattened their 1.1rem side padding to
+   zero - so on a phone the menu text sat hard against the panel edge. */
 @media (max-width:500px){
   .nav-links{gap:0.62rem}
-  .nav-links a{font-size:1rem;letter-spacing:1px;padding:0.55rem 0}
+  .nav-links>li>a{font-size:1rem;letter-spacing:1px;padding:0.55rem 0}
   .nav-logo img{height:42px}
   .nav-dropdown-menu a{font-size:0.95rem}
 }
 @media (max-width:340px){
   .nav-links{gap:0.45rem}
-  .nav-links a{font-size:0.92rem;letter-spacing:0.5px}
+  .nav-links>li>a{font-size:0.92rem;letter-spacing:0.5px}
   .nav-logo img{height:36px}
 }
 /* Footer links sat at a 19px tap height; they are a real navigation
