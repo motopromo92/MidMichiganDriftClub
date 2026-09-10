@@ -1,0 +1,186 @@
+/* ============================================================
+   MMDC PRINT COLLATERAL — shared stylesheet
+   Brand tokens are copied from styles.css deliberately: this file has to
+   stand alone so a doc renders correctly from file:// during PDF export,
+   with no dependency on the site stylesheet's load order or overrides.
+   Sheets are fixed at US Letter and paginate explicitly, so a headline
+   never lands orphaned at the foot of a page in a document that gets
+   handed across a table.
+   ============================================================ */
+:root{
+  --black:#0e1410;--deep:#0a1612;--teal:#1a9480;--teal-dark:#0d6b5c;
+  --teal-light:#26bfa8;--teal-bright:#2ed8be;--smoke:#8a9a98;
+  --smoke-light:#b0bfbd;--white:#fff;--off-white:#f8fbfb;--ink:#1e2e2c;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+@page{size:letter;margin:0}
+html{background:#5a6a68}
+body{font-family:'Barlow Condensed',sans-serif;color:var(--ink);background:#5a6a68;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+
+.sheet{
+  width:8.5in;height:11in;background:var(--off-white);
+  position:relative;overflow:hidden;
+  page-break-after:always;break-after:page;
+  margin:0 auto 0.35in;display:flex;flex-direction:column;
+}
+.sheet:last-child{page-break-after:auto;break-after:auto;margin-bottom:0}
+@media print{body{background:none}.sheet{margin:0;box-shadow:none}}
+@media screen{.sheet{box-shadow:0 6px 28px rgba(0,0,0,0.45)}body{padding:0.35in 0}}
+
+/* film-grain wash, same trick the site uses */
+.sheet::after{
+  content:'';position:absolute;inset:0;pointer-events:none;z-index:50;opacity:0.35;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
+}
+.pad{padding:0.6in 0.7in}
+.grow{flex:1}
+
+/* ---------- COVER ---------- */
+.cover{background:var(--black);color:var(--white);justify-content:flex-end}
+.cover .cover-inner{padding-top:0.4in}
+.cover-bg{position:absolute;inset:0;background-size:cover;background-position:center 55%}
+.cover-shade{position:absolute;inset:0;background:linear-gradient(to bottom,rgba(10,22,18,0.72) 0%,rgba(10,22,18,0.55) 42%,rgba(10,22,18,0.96) 88%)}
+.cover-inner{position:relative;z-index:5;padding:0.7in;display:flex;flex-direction:column;height:100%}
+/* The mark is light artwork built for dark ground - on the site it only ever
+   sits on solid black. Over a sunlit tree line it washes out whatever the
+   blend mode, so the cover gives it the same solid black band with a teal
+   rule that the site header uses. */
+.cover-topbar{background:var(--black);border-bottom:5px solid var(--teal);
+  padding:0.3in 0.7in;position:relative;z-index:6;flex-shrink:0}
+.cover-logo{height:0.8in;width:auto;display:block}
+.cover-body{margin-top:auto}
+.cover-eyebrow{font-family:'Special Elite',cursive;font-size:10pt;letter-spacing:5px;color:var(--teal-bright);margin-bottom:0.14in}
+.cover-title{font-family:'Bebas Neue',sans-serif;font-size:58pt;line-height:0.88;letter-spacing:3px;color:var(--white);text-shadow:3px 3px 0 var(--teal-dark)}
+.cover-title span{color:var(--teal-bright)}
+.cover-sub{font-family:'Bebas Neue',sans-serif;font-size:19pt;letter-spacing:7px;color:var(--teal-light);margin-top:0.16in}
+.cover-rule{height:5px;background:var(--teal);width:2.6in;margin:0.28in 0}
+.cover-meta{font-family:'Special Elite',cursive;font-size:8.5pt;line-height:1.9;color:var(--smoke-light);letter-spacing:1px}
+.cover-meta strong{color:var(--teal-bright);font-weight:400}
+
+/* ---------- RUNNING HEAD / FOOT ---------- */
+.doc-head{display:flex;align-items:center;justify-content:space-between;
+  padding:0.34in 0.7in 0;border-bottom:none}
+.doc-head .mark{font-family:'Bebas Neue',sans-serif;font-size:11pt;letter-spacing:3px;color:var(--black)}
+.doc-head .mark span{color:var(--teal)}
+.doc-head .tag{font-family:'Special Elite',cursive;font-size:7.5pt;letter-spacing:3px;color:var(--smoke)}
+.doc-foot{display:flex;align-items:center;justify-content:space-between;
+  padding:0 0.7in 0.34in;font-family:'Special Elite',cursive;font-size:7.5pt;
+  letter-spacing:2px;color:var(--smoke)}
+.doc-foot .pg{font-family:'Bebas Neue',sans-serif;font-size:11pt;letter-spacing:2px;color:var(--teal)}
+
+/* ---------- SECTION FURNITURE ---------- */
+.eyebrow{font-family:'Special Elite',cursive;font-size:8pt;color:var(--teal);letter-spacing:5px;margin-bottom:0.06in}
+h2.sec{font-family:'Bebas Neue',sans-serif;font-size:28pt;line-height:1;letter-spacing:2px;color:var(--black);display:inline-block}
+h2.sec::after{content:'';display:block;height:4px;width:62%;background:var(--teal);margin-top:0.06in}
+h3.sub{font-family:'Bebas Neue',sans-serif;font-size:15pt;letter-spacing:2px;color:var(--black);margin-bottom:0.08in}
+.stack{margin-top:0.3in}
+.stack-sm{margin-top:0.2in}
+p.lead{font-family:'Special Elite',cursive;font-size:9.5pt;line-height:1.75;color:var(--ink)}
+p.lead+p.lead{margin-top:0.12in}
+p.lead strong{font-family:'Bebas Neue',sans-serif;font-size:1.18em;letter-spacing:1px;color:var(--black);font-weight:400}
+
+/* ---------- PULLED MISSION BAR ---------- */
+.mission{background:var(--black);border-left:6px solid var(--teal-bright);padding:0.26in 0.3in;position:relative;overflow:hidden}
+.mission::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 0% 50%,rgba(26,148,128,0.16) 0%,transparent 62%)}
+.mission .lbl{position:relative;font-family:'Special Elite',cursive;font-size:7.5pt;letter-spacing:4px;color:var(--teal-light);margin-bottom:0.08in}
+.mission p{position:relative;font-family:'Special Elite',cursive;font-size:9.5pt;line-height:1.7;color:var(--smoke-light)}
+.mission p strong{color:var(--teal-bright);font-weight:400}
+
+/* ---------- CARD GRID ---------- */
+.grid{display:grid;gap:0.16in}
+.g2{grid-template-columns:1fr 1fr}
+.g3{grid-template-columns:repeat(3,1fr)}
+.card{background:var(--white);border:1.5px solid rgba(10,22,18,0.12);border-top:5px solid var(--teal);padding:0.2in 0.22in}
+.card h4{font-family:'Bebas Neue',sans-serif;font-size:12.5pt;letter-spacing:1.5px;color:var(--black);margin-bottom:0.08in;line-height:1.05}
+.card p{font-family:'Special Elite',cursive;font-size:8pt;line-height:1.65;color:#4c5c5a}
+.card ul{list-style:none;margin-top:0.06in}
+.card li{font-family:'Special Elite',cursive;font-size:8pt;line-height:1.6;color:#4c5c5a;
+  padding:0.055in 0 0.055in 0.13in;position:relative;border-bottom:1px solid rgba(10,22,18,0.07)}
+.card li::before{content:'';position:absolute;left:0;top:0.11in;width:4px;height:4px;background:var(--teal-bright)}
+.card li:last-child{border-bottom:none}
+.card li strong{display:block;font-family:'Bebas Neue',sans-serif;font-size:1.1em;letter-spacing:1px;color:var(--black);font-weight:400}
+
+/* ---------- LINE ITEM LIST ---------- */
+.items{list-style:none}
+.items li{font-family:'Special Elite',cursive;font-size:8.6pt;line-height:1.6;color:var(--ink);
+  padding:0.1in 0 0.1in 0.2in;position:relative;border-bottom:1px solid rgba(10,22,18,0.1)}
+.items li::before{content:'';position:absolute;left:0;top:0.155in;width:6px;height:6px;background:var(--teal)}
+.items li:last-child{border-bottom:none}
+.items li strong{font-family:'Bebas Neue',sans-serif;font-size:1.15em;letter-spacing:1.5px;color:var(--black);font-weight:400}
+
+/* ---------- STATS ---------- */
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:rgba(10,22,18,0.14);border:1px solid rgba(10,22,18,0.14)}
+.stat{background:var(--white);padding:0.2in 0.1in;text-align:center}
+.stat .n{font-family:'Bebas Neue',sans-serif;font-size:25pt;line-height:1;color:var(--teal);letter-spacing:1px}
+.stat .l{font-family:'Special Elite',cursive;font-size:7pt;letter-spacing:2px;color:#5c6c6a;margin-top:0.06in;line-height:1.4}
+
+/* ---------- TABLES ---------- */
+table{width:100%;border-collapse:collapse;background:var(--white);border:1.5px solid rgba(10,22,18,0.12)}
+thead th{background:var(--black);color:var(--white);font-family:'Bebas Neue',sans-serif;
+  font-size:11pt;letter-spacing:2px;text-align:left;padding:0.13in 0.15in;border-bottom:4px solid var(--teal)}
+tbody td{font-family:'Barlow Condensed',sans-serif;font-size:9pt;color:var(--ink);
+  padding:0.12in 0.15in;border-bottom:1px solid rgba(10,22,18,0.09);vertical-align:top;line-height:1.4}
+tbody tr:last-child td{border-bottom:none}
+tbody tr:nth-child(even) td{background:#f4f9f8}
+td.c,th.c{text-align:center}
+td.venue{font-family:'Bebas Neue',sans-serif;font-size:12pt;letter-spacing:1.5px;color:var(--black)}
+.yes{color:var(--teal);font-size:11pt}
+.no{color:rgba(10,22,18,0.25)}
+
+/* ---------- TIER STRIP ---------- */
+.tiers{display:grid;grid-template-columns:repeat(4,1fr);gap:0.13in}
+.tier{background:var(--white);border:1.5px solid rgba(10,22,18,0.12);display:flex;flex-direction:column}
+.tier .th{background:var(--black);padding:0.13in 0.15in;border-bottom:4px solid var(--teal)}
+.tier .tn{font-family:'Bebas Neue',sans-serif;font-size:13pt;letter-spacing:3px;color:var(--white)}
+/* the club's own teal ramp carries the ladder — literal bronze/silver/gold
+   would drop three off-brand metals into a palette that has none */
+.tier.t1 .th{border-bottom-color:rgba(138,154,152,0.5)}
+.tier.t2 .th{border-bottom-color:var(--smoke)}
+.tier.t3 .th{border-bottom-color:var(--teal-light)}
+.tier.t4{border-color:var(--teal-bright)}
+.tier.t4 .th{border-bottom-color:var(--teal-bright)}
+.tier.t4 .tn{color:var(--teal-bright)}
+.tier .tb{padding:0.14in 0.15in;flex:1}
+.tier ul{list-style:none}
+.tier li{font-family:'Special Elite',cursive;font-size:7.4pt;line-height:1.55;color:#2d3d3b;
+  padding:0.06in 0 0.06in 0.12in;position:relative;border-bottom:1px solid rgba(10,22,18,0.07)}
+.tier li::before{content:'';position:absolute;left:0;top:0.105in;width:4px;height:4px;background:var(--teal-bright)}
+.tier li:last-child{border-bottom:none}
+
+/* ---------- NOTE / CALLOUT ---------- */
+.note{background:#edfaf8;border:1.5px solid rgba(26,148,128,0.3);border-left:6px solid var(--teal);
+  padding:0.16in 0.2in;font-family:'Barlow Condensed',sans-serif;font-size:9pt;line-height:1.5;color:#2d3d3b}
+.note strong{color:var(--teal-dark)}
+.fill{background:var(--white);border:1.5px dashed rgba(26,148,128,0.55);padding:0.16in 0.2in;
+  font-family:'Barlow Condensed',sans-serif;font-size:9pt;line-height:1.5;color:var(--smoke)}
+.fill b{font-family:'Bebas Neue',sans-serif;font-size:1.15em;letter-spacing:1.5px;color:var(--teal-dark);font-weight:400}
+
+/* ---------- CONTACT BLOCK ---------- */
+.contact{background:var(--black);color:var(--white);padding:0.3in 0.34in;border-left:6px solid var(--teal-bright);position:relative;overflow:hidden}
+.contact::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 100% 0%,rgba(26,148,128,0.2) 0%,transparent 60%)}
+.contact .lbl{position:relative;font-family:'Special Elite',cursive;font-size:7.5pt;letter-spacing:4px;color:var(--teal-light);margin-bottom:0.08in}
+.contact h3{position:relative;font-family:'Bebas Neue',sans-serif;font-size:24pt;letter-spacing:2px;color:var(--white);line-height:1;margin-bottom:0.14in}
+.contact .rows{position:relative;display:grid;grid-template-columns:1fr 1fr;gap:0.1in 0.3in}
+.contact .row{border-top:1px solid rgba(255,255,255,0.14);padding-top:0.09in}
+.contact .k{font-family:'Special Elite',cursive;font-size:7pt;letter-spacing:3px;color:var(--smoke)}
+.contact .v{font-family:'Bebas Neue',sans-serif;font-size:13pt;letter-spacing:1.5px;color:var(--teal-bright);margin-top:0.02in}
+.contact .v.sm{font-size:11pt;color:var(--white)}
+
+/* ---------- BACK COVER ---------- */
+.backcover{background:var(--black);color:var(--white);justify-content:center}
+.back-bg{position:absolute;inset:0;background-size:cover;background-position:center 58%;opacity:0.5}
+.back-shade{position:absolute;inset:0;background:linear-gradient(to bottom,rgba(10,22,18,0.90) 0%,rgba(10,22,18,0.72) 45%,rgba(10,22,18,0.96) 100%)}
+.back-inner{position:relative;z-index:5;padding:0.8in 0.7in;display:flex;flex-direction:column;height:100%;justify-content:center;text-align:center;align-items:center}
+.back-logo{height:0.85in;width:auto;filter:drop-shadow(0 2px 10px rgba(0,0,0,0.75));margin-bottom:0.34in}
+.back-eyebrow{font-family:'Special Elite',cursive;font-size:9pt;letter-spacing:5px;color:var(--teal-bright);margin-bottom:0.14in}
+.back-title{font-family:'Bebas Neue',sans-serif;font-size:40pt;line-height:0.92;letter-spacing:2px;color:var(--white);text-shadow:2px 2px 0 var(--teal-dark)}
+.back-title span{color:var(--teal-bright)}
+.back-rule{height:5px;width:2.2in;background:var(--teal);margin:0.3in 0}
+.back-line{font-family:'Special Elite',cursive;font-size:9.5pt;line-height:1.85;color:var(--smoke-light);max-width:5in}
+.back-mail{font-family:'Bebas Neue',sans-serif;font-size:26pt;letter-spacing:2px;color:var(--teal-bright);margin-top:0.3in}
+.back-meta{font-family:'Special Elite',cursive;font-size:8pt;line-height:1.95;color:var(--smoke);letter-spacing:1.5px;margin-top:0.22in}
+
+/* The grain wash is a screen flourish. On paper it is close to invisible and
+   Chrome rasterises it full-bleed on every sheet, which was adding ~43% to
+   the exported PDF - real weight on a document meant to be emailed. */
+@media print{.sheet::after{display:none}}
