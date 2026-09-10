@@ -44,15 +44,15 @@ nav{max-width:1100px;margin:0 auto;display:flex;align-items:center;justify-conte
 .nav-links a.active{color:var(--teal-bright)}
 .nav-links a.active::before,
 .nav-links a.active::after{width:100%}
-/* SOCIAL DROPDOWN */
-.nav-social{position:relative}
-.nav-social-trigger{display:inline-flex;align-items:center;gap:4px;cursor:pointer;user-select:none}
-.nav-social-trigger .caret{font-size:0.7rem;transition:transform 0.2s}
-.nav-social.open .nav-social-trigger .caret{transform:rotate(180deg)}
-.nav-social.open .nav-social-trigger{color:var(--teal-bright)}
-.nav-social.open .nav-social-trigger::before,
-.nav-social.open .nav-social-trigger::after{width:100%}
-.nav-social-menu{
+/* NAV DROPDOWNS */
+.nav-dropdown{position:relative}
+.nav-dropdown-trigger{display:inline-flex;align-items:center;gap:4px;cursor:pointer;user-select:none}
+.nav-dropdown-trigger .caret{font-size:0.7rem;transition:transform 0.2s}
+.nav-dropdown.open .nav-dropdown-trigger .caret{transform:rotate(180deg)}
+.nav-dropdown.open .nav-dropdown-trigger{color:var(--teal-bright)}
+.nav-dropdown.open .nav-dropdown-trigger::before,
+.nav-dropdown.open .nav-dropdown-trigger::after{width:100%}
+.nav-dropdown-menu{
   position:absolute;top:calc(100% + 12px);right:0;min-width:172px;
   background:var(--black);border:2px solid var(--teal-dark);
   list-style:none;padding:0.35rem 0;margin:0;z-index:120;
@@ -60,12 +60,14 @@ nav{max-width:1100px;margin:0 auto;display:flex;align-items:center;justify-conte
   transition:opacity 0.18s ease,transform 0.18s ease,visibility 0.18s;
   box-shadow:0 10px 26px rgba(0,0,0,0.45);
 }
-.nav-social.open .nav-social-menu{opacity:1;visibility:visible;transform:translateY(0)}
-.nav-social-menu::before{content:'';position:absolute;top:-8px;right:18px;border:6px solid transparent;border-bottom-color:var(--teal-dark)}
-.nav-social-menu a{display:block;padding:0.5rem 1.1rem;font-size:1.05rem;letter-spacing:2px;color:var(--smoke-light);white-space:nowrap}
-.nav-social-menu a::before,
-.nav-social-menu a::after{display:none}
-.nav-social-menu a:hover{background:var(--teal-dark);color:var(--white)}
+.nav-dropdown.open .nav-dropdown-menu{opacity:1;visibility:visible;transform:translateY(0)}
+.nav-dropdown-menu::before{content:'';position:absolute;top:-8px;right:18px;border:6px solid transparent;border-bottom-color:var(--teal-dark)}
+.nav-dropdown.align-left .nav-dropdown-menu{left:0;right:auto}
+.nav-dropdown.align-left .nav-dropdown-menu::before{left:18px;right:auto}
+.nav-dropdown-menu a{display:block;padding:0.5rem 1.1rem;font-size:1.05rem;letter-spacing:2px;color:var(--smoke-light);white-space:nowrap}
+.nav-dropdown-menu a::before,
+.nav-dropdown-menu a::after{display:none}
+.nav-dropdown-menu a:hover{background:var(--teal-dark);color:var(--white)}
 /* HERO PHOTO ROTATOR */
 .hero-slide{position:absolute;inset:0;background-size:cover;background-position:center 40%;opacity:0;z-index:0;transition:opacity 1.6s ease-in-out;will-change:opacity}
 /* The outgoing slide holds full opacity underneath while the incoming one
@@ -78,29 +80,22 @@ nav{max-width:1100px;margin:0 auto;display:flex;align-items:center;justify-conte
 .hero-dots button::before{content:'';position:absolute;top:50%;left:50%;width:9px;height:9px;margin:-5px 0 0 -5px;border:1px solid rgba(255,255,255,0.75);transition:background 0.25s,border-color 0.25s}
 .hero-dots button[aria-current="true"]::before{background:var(--teal-bright);border-color:var(--teal-bright)}
 @media (prefers-reduced-motion:reduce){.hero-slide{transition:none}}
-/* Nav items get tight on small phones - shrink rather than wrap. Raised from
-   420px to 560px when Partners made it five items: at full size five no longer
-   clear the logo, and the row silently eats the nav's own 20px padding rather
-   than overflowing, so it reads as merely tight on a 430pt phone. */
-@media (max-width:560px){
+/* Four nav items get tight on small phones - shrink rather than wrap.
+   Partners lives inside the About dropdown rather than as a fifth top-level
+   item, which is what keeps this to two steps.
+   The step is 500px, not the 420px it was before the dropdown: the caret on
+   "About" widened the row just enough that a 430pt phone landed in the gap
+   above the old breakpoint with the logo touching the links. */
+@media (max-width:500px){
   .nav-links{gap:0.62rem}
   .nav-links a{font-size:1rem;letter-spacing:1px;padding:0.55rem 0}
   .nav-logo img{height:42px}
-  .nav-social-menu a{font-size:0.95rem}
+  .nav-dropdown-menu a{font-size:0.95rem}
 }
-/* Second step, raised from 340px to 400px alongside the five-item nav: at
-   375 (iPhone SE) the shrink above still left the logo touching the links. */
-@media (max-width:400px){
+@media (max-width:340px){
   .nav-links{gap:0.45rem}
   .nav-links a{font-size:0.92rem;letter-spacing:0.5px}
   .nav-logo img{height:36px}
-}
-/* Third step for the 320px phones still in the wild: five items and the logo
-   only clear each other once the mark comes down again. */
-@media (max-width:340px){
-  .nav-links{gap:0.32rem}
-  .nav-links a{font-size:0.86rem;letter-spacing:0}
-  .nav-logo img{height:30px}
 }
 /* Footer links sat at a 19px tap height; they are a real navigation
    surface on a phone, so give them room. */
