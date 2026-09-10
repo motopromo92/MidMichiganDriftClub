@@ -78,17 +78,29 @@ nav{max-width:1100px;margin:0 auto;display:flex;align-items:center;justify-conte
 .hero-dots button::before{content:'';position:absolute;top:50%;left:50%;width:9px;height:9px;margin:-5px 0 0 -5px;border:1px solid rgba(255,255,255,0.75);transition:background 0.25s,border-color 0.25s}
 .hero-dots button[aria-current="true"]::before{background:var(--teal-bright);border-color:var(--teal-bright)}
 @media (prefers-reduced-motion:reduce){.hero-slide{transition:none}}
-/* Four nav items get tight on small phones - shrink rather than wrap */
-@media (max-width:420px){
+/* Nav items get tight on small phones - shrink rather than wrap. Raised from
+   420px to 560px when Partners made it five items: at full size five no longer
+   clear the logo, and the row silently eats the nav's own 20px padding rather
+   than overflowing, so it reads as merely tight on a 430pt phone. */
+@media (max-width:560px){
   .nav-links{gap:0.62rem}
   .nav-links a{font-size:1rem;letter-spacing:1px;padding:0.55rem 0}
   .nav-logo img{height:42px}
   .nav-social-menu a{font-size:0.95rem}
 }
-@media (max-width:340px){
+/* Second step, raised from 340px to 400px alongside the five-item nav: at
+   375 (iPhone SE) the shrink above still left the logo touching the links. */
+@media (max-width:400px){
   .nav-links{gap:0.45rem}
   .nav-links a{font-size:0.92rem;letter-spacing:0.5px}
   .nav-logo img{height:36px}
+}
+/* Third step for the 320px phones still in the wild: five items and the logo
+   only clear each other once the mark comes down again. */
+@media (max-width:340px){
+  .nav-links{gap:0.32rem}
+  .nav-links a{font-size:0.86rem;letter-spacing:0}
+  .nav-logo img{height:30px}
 }
 /* Footer links sat at a 19px tap height; they are a real navigation
    surface on a phone, so give them room. */
@@ -351,3 +363,66 @@ footer{background:var(--black);border-top:4px solid var(--teal);padding:3rem 2re
 .dual-cta-half p{font-family:'Special Elite',cursive;font-size:0.88rem;color:var(--smoke);margin-bottom:2rem;letter-spacing:1px;line-height:1.6}
 /* DESKTOP */
 @media(min-width:900px){nav{padding:0 2rem}.nav-logo-text{display:flex}.nav-links{gap:2.5rem}.section{padding:5rem 2rem}.about-section{padding:5rem 2rem}}
+/* ============================================================
+   PARTNER PAGES — /partnerships/ (public) and /partners/arroyo/ (unlisted)
+   ============================================================ */
+/* Header photos. Partnerships takes the frame with a sponsor's tent in it:
+   it sells the trackside activation better than a bare car does. Arroyo
+   takes the tandem pair, which is what its bracket copy is about. */
+.page-partners .page-header-bg{background-image:url('/mmdc-hero-2.webp');background-position:center 55%}
+.page-arroyo .page-header-bg{background-image:url('/mmdc-hero-4.webp');background-position:center 58%}
+.page-header .sub{font-family:'Bebas Neue',sans-serif;font-size:clamp(1.05rem,2.6vw,1.55rem);color:var(--teal-light);letter-spacing:6px;margin-top:0.9rem;position:relative;z-index:3;text-shadow:0 2px 8px rgba(0,0,0,0.5)}
+.page-header .page-cta{margin-top:2.2rem;display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;position:relative;z-index:3}
+/* An unlisted pitch page says so on its face, so a screenshot passed around
+   in a sponsor thread never reads as a live public page. header::before
+   paints 100vh of black upward to cover the iOS URL-bar band, so this bar
+   has to sit above that to survive. */
+.private-flag{position:relative;z-index:101;background:var(--teal-dark);color:var(--white);text-align:center;font-family:'Bebas Neue',sans-serif;letter-spacing:3px;font-size:0.88rem;line-height:1.35;padding:0.6rem 1rem}
+/* Two-up pillars: .pillars goes to three columns at 900px, which strands a
+   pair. Sections that hold exactly two cards opt out. */
+@media(min-width:900px){.pillars.cols-2{grid-template-columns:1fr 1fr}}
+.pillar ul{list-style:none;margin-top:0.9rem}
+.pillar li{font-family:'Special Elite',cursive;font-size:0.8rem;line-height:1.65;color:var(--smoke);padding:0.55rem 0 0.55rem 1.05rem;border-bottom:1px solid rgba(10,22,18,0.08);position:relative}
+.pillar li::before{content:'';position:absolute;left:0;top:1rem;width:5px;height:5px;background:var(--teal-bright)}
+.pillar li:last-child{border-bottom:none;padding-bottom:0}
+.pillar li strong{display:block;font-family:'Bebas Neue',sans-serif;font-size:1.08em;letter-spacing:1px;color:var(--black);margin-bottom:0.1rem}
+/* STAT ROW */
+.stats-row{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:rgba(10,22,18,0.12);border:1px solid rgba(10,22,18,0.12);margin-top:3rem}
+@media(min-width:760px){.stats-row{grid-template-columns:repeat(4,1fr)}}
+.stat-card{background:var(--white);padding:1.8rem 1rem;text-align:center}
+.stat-num{font-family:'Bebas Neue',sans-serif;font-size:clamp(2.1rem,5vw,3rem);line-height:1;color:var(--teal);letter-spacing:2px}
+.stat-lbl{font-family:'Special Elite',cursive;font-size:0.7rem;letter-spacing:2px;color:var(--smoke);margin-top:0.5rem;line-height:1.45}
+/* PARTNERSHIP TIERS */
+.tier-grid{display:grid;grid-template-columns:1fr;gap:1.25rem;margin-top:3rem}
+@media(min-width:640px){.tier-grid{grid-template-columns:1fr 1fr}}
+@media(min-width:1000px){.tier-grid{grid-template-columns:repeat(4,1fr)}}
+.tier{background:var(--white);border:2px solid rgba(10,22,18,0.1);display:flex;flex-direction:column;transition:transform 0.2s,box-shadow 0.2s}
+.tier:hover{transform:translateY(-4px);box-shadow:0 8px 24px rgba(0,0,0,0.09)}
+.tier-head{background:var(--black);padding:1.1rem 1.3rem;border-bottom:4px solid var(--teal)}
+.tier-name{font-family:'Bebas Neue',sans-serif;font-size:1.6rem;letter-spacing:4px;color:var(--white)}
+/* The tier ladder is carried by the club's own teal ramp rather than literal
+   bronze/silver/gold, which would drop three off-brand metals into a palette
+   that has none. */
+.tier.bronze .tier-head{border-bottom-color:rgba(138,154,152,0.55)}
+.tier.silver .tier-head{border-bottom-color:var(--smoke)}
+.tier.gold .tier-head{border-bottom-color:var(--teal-light)}
+.tier.platinum{border-color:var(--teal-bright)}
+.tier.platinum .tier-head{border-bottom-color:var(--teal-bright)}
+.tier.platinum .tier-name{color:var(--teal-bright)}
+.tier-body{padding:1.3rem;display:flex;flex-direction:column;gap:1.2rem;flex:1}
+.tier-group-label{font-family:'Special Elite',cursive;font-size:0.66rem;letter-spacing:3px;color:var(--teal);margin-bottom:0.4rem}
+.tier-body ul{list-style:none}
+.tier-body li{font-family:'Special Elite',cursive;font-size:0.78rem;line-height:1.65;color:#2d3d3b;padding:0.5rem 0 0.5rem 1rem;position:relative;border-bottom:1px solid rgba(10,22,18,0.07)}
+.tier-body li::before{content:'';position:absolute;left:0;top:0.95rem;width:5px;height:5px;background:var(--teal-bright)}
+.tier-body li:last-child{border-bottom:none;padding-bottom:0}
+/* BENEFIT MATRIX */
+.matrix-wrap{margin-top:3rem;overflow-x:auto;border:2px solid rgba(10,22,18,0.1)}
+.matrix{width:100%;border-collapse:collapse;min-width:660px;background:var(--white)}
+.matrix th,.matrix td{padding:0.85rem 1rem;text-align:left;border-bottom:1px solid rgba(10,22,18,0.08)}
+.matrix thead th{background:var(--black);color:var(--white);font-family:'Bebas Neue',sans-serif;font-size:1.05rem;letter-spacing:2px;border-bottom:4px solid var(--teal)}
+.matrix tbody td{font-family:'Barlow Condensed',sans-serif;font-size:0.98rem;color:#2d3d3b}
+.matrix tbody tr:nth-child(even) td{background:#f4f9f8}
+.matrix tbody tr:last-child td{border-bottom:none}
+.matrix .center{text-align:center}
+.matrix .yes{color:var(--teal);font-size:1.15rem}
+.matrix .no{color:rgba(10,22,18,0.25)}
