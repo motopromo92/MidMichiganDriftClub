@@ -73,8 +73,8 @@ body{font-family:'Barlow Condensed',sans-serif;color:var(--ink);background:#5a6a
 h2.sec{font-family:'Bebas Neue',sans-serif;font-size:28pt;line-height:1;letter-spacing:2px;color:var(--black);display:inline-block}
 h2.sec::after{content:'';display:block;height:4px;width:62%;background:var(--teal);margin-top:0.06in}
 h3.sub{font-family:'Bebas Neue',sans-serif;font-size:15pt;letter-spacing:2px;color:var(--black);margin-bottom:0.08in}
-.stack{margin-top:0.3in}
-.stack-sm{margin-top:0.2in}
+.stack{margin-top:0.24in}
+.stack-sm{margin-top:0.16in}
 p.lead{font-family:'Special Elite',cursive;font-size:9.5pt;line-height:1.75;color:var(--ink)}
 p.lead+p.lead{margin-top:0.12in}
 p.lead strong{font-family:'Bebas Neue',sans-serif;font-size:1.18em;letter-spacing:1px;color:var(--black);font-weight:400}
@@ -142,8 +142,8 @@ td.venue{font-family:'Bebas Neue',sans-serif;font-size:12pt;letter-spacing:1.5px
 .tier.t4 .tn{color:var(--teal-bright)}
 .tier .tb{padding:0.14in 0.15in;flex:1}
 .tier ul{list-style:none}
-.tier li{font-family:'Special Elite',cursive;font-size:7.4pt;line-height:1.55;color:#2d3d3b;
-  padding:0.06in 0 0.06in 0.12in;position:relative;border-bottom:1px solid rgba(10,22,18,0.07)}
+.tier li{font-family:'Special Elite',cursive;font-size:7.3pt;line-height:1.5;color:#2d3d3b;
+  padding:0.05in 0 0.05in 0.12in;position:relative;border-bottom:1px solid rgba(10,22,18,0.07)}
 .tier li::before{content:'';position:absolute;left:0;top:0.105in;width:4px;height:4px;background:var(--teal-bright)}
 .tier li:last-child{border-bottom:none}
 
