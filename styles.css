@@ -134,17 +134,17 @@ nav{max-width:1100px;margin:0 auto;display:flex;align-items:center;justify-conte
 .btn-outline:hover{background:var(--teal-light);color:var(--black);transform:translate(-2px,-2px)}
 /* SHARED SECTION */
 .section{max-width:1100px;margin:0 auto;padding:3rem 1.25rem}
-.section-label{font-family:'Special Elite',cursive;font-size:0.75rem;color:var(--teal);letter-spacing:6px;margin-bottom:0.5rem}
+.section-label{font-family:'Barlow',sans-serif;font-size:0.75rem;color:var(--teal);letter-spacing:6px;margin-bottom:0.5rem}
 .section-title{font-family:'Bebas Neue',sans-serif;font-size:clamp(2.5rem,6vw,4rem);line-height:1;color:var(--black);letter-spacing:3px;margin-bottom:3rem;display:inline-block}
 .section-title::after{content:'';display:block;height:4px;width:60%;background:var(--teal);margin-top:0.4rem}
 /* FOOTER */
 footer{background:var(--black);border-top:4px solid var(--teal);padding:3rem 2rem;text-align:center}
 .footer-logo-img{height:80px;width:auto;mix-blend-mode:lighten;filter:brightness(1.05);margin-bottom:0.75rem;cursor:pointer}
-.footer-tagline{font-family:'Special Elite',cursive;font-size:0.75rem;color:var(--smoke);letter-spacing:3px;margin-bottom:1.5rem}
+.footer-tagline{font-family:'Barlow',sans-serif;font-size:0.75rem;color:var(--smoke);letter-spacing:3px;margin-bottom:1.5rem}
 .footer-links{display:flex;gap:2rem;justify-content:center;list-style:none;margin-bottom:1.5rem;flex-wrap:wrap}
 .footer-links a{font-family:'Bebas Neue',sans-serif;letter-spacing:2px;color:var(--smoke-light);text-decoration:none;font-size:0.95rem;transition:color 0.2s;cursor:pointer}
 .footer-links a:hover{color:var(--teal-bright)}
-.footer-copy{font-family:'Special Elite',cursive;font-size:0.7rem;color:var(--smoke)}
+.footer-copy{font-family:'Barlow',sans-serif;font-size:0.7rem;color:var(--smoke)}
 /* HERO */
 .hero{
   position:relative;overflow:hidden;
@@ -172,7 +172,7 @@ footer{background:var(--black);border-top:4px solid var(--teal);padding:3rem 2re
 }
 .hero-content{text-align:center;z-index:3;padding:2rem;animation:fadeUp 0.8s ease both;display:flex;flex-direction:column;align-items:center}
 @keyframes fadeUp{from{opacity:0;transform:translateY(28px)}to{opacity:1;transform:translateY(0)}}
-.hero-eyebrow{font-family:'Special Elite',cursive;font-size:0.82rem;color:var(--teal-bright);letter-spacing:5px;margin-bottom:0.75rem;text-shadow:0 1px 6px rgba(0,0,0,0.6)}
+.hero-eyebrow{font-family:'Barlow',sans-serif;font-size:0.82rem;color:var(--teal-bright);letter-spacing:5px;margin-bottom:0.75rem;text-shadow:0 1px 6px rgba(0,0,0,0.6)}
 .hero-title{font-family:'Bebas Neue',sans-serif;font-size:clamp(3.5rem,10vw,7rem);color:var(--white);letter-spacing:4px;line-height:0.9;text-shadow:3px 3px 0 var(--teal-dark),0 4px 24px rgba(0,0,0,0.5)}
 .hero-sub{font-family:'Bebas Neue',sans-serif;font-size:clamp(1.2rem,3vw,1.8rem);color:var(--teal-light);letter-spacing:8px;margin-top:0.75rem;text-shadow:0 2px 8px rgba(0,0,0,0.5)}
 .hero-cta{margin-top:2.2rem;display:flex;gap:1rem;justify-content:center;flex-wrap:wrap}
@@ -208,7 +208,7 @@ footer{background:var(--black);border-top:4px solid var(--teal);padding:3rem 2re
 @media(min-width:600px){.event-card.weekend .event-date-block .day{font-size:1.95rem}}
 .event-card.weekend .event-name{font-size:1.7rem}
 .event-date-block{text-align:center;background:var(--black);color:var(--white);padding:0.8rem 0.5rem;flex-shrink:0}
-.event-date-block .month{font-family:'Special Elite',cursive;font-size:0.68rem;letter-spacing:3px;color:var(--teal-light);text-transform:uppercase}
+.event-date-block .month{font-family:'Barlow',sans-serif;font-size:0.68rem;letter-spacing:3px;color:var(--teal-light);text-transform:uppercase}
 .event-date-block .day{font-family:'Bebas Neue',sans-serif;font-size:2.4rem;line-height:1;color:var(--white)}
 .event-date-block .multi{font-family:'Bebas Neue',sans-serif;font-size:0.8rem;color:var(--smoke);letter-spacing:1px}
 .event-info .event-name{font-family:'Bebas Neue',sans-serif;font-size:1.5rem;letter-spacing:2px;color:var(--black);line-height:1.1}
@@ -216,7 +216,7 @@ footer{background:var(--black);border-top:4px solid var(--teal);padding:3rem 2re
    colour and mark it with a rule rather than a default underline. */
 .event-info .event-name a{color:inherit;text-decoration:none;border-bottom:2px solid rgba(26,148,128,0.35);transition:color 0.2s,border-color 0.2s}
 .event-info .event-name a:hover{color:var(--teal-dark);border-bottom-color:var(--teal)}
-.event-meta{font-family:'Special Elite',cursive;font-size:0.78rem;color:var(--smoke);margin-top:0.35rem;letter-spacing:1px}
+.event-meta{font-family:'Barlow',sans-serif;font-size:0.78rem;color:var(--smoke);margin-top:0.35rem;letter-spacing:1px}
 .event-meta .venue{font-family:'Barlow Condensed',sans-serif;font-weight:600;color:var(--teal-dark);font-size:0.85rem}
 .event-price{font-family:'Bebas Neue',sans-serif;font-size:1.1rem;color:var(--smoke);letter-spacing:1px;white-space:nowrap;text-align:right}
 .event-price .price-range{display:block;font-size:0.78rem;color:var(--teal)}
@@ -247,20 +247,20 @@ footer{background:var(--black);border-top:4px solid var(--teal);padding:3rem 2re
 @media(min-width:600px){.venue-callout{flex-direction:row;align-items:center;gap:2rem;padding:1.5rem 2rem}.venue-callout .btn{margin-left:auto}}
 .venue-callout .icon{font-size:2.5rem;flex-shrink:0}
 .venue-callout .venue-name{font-family:'Bebas Neue',sans-serif;font-size:1.6rem;letter-spacing:2px;color:var(--teal-light)}
-.venue-callout .venue-addr{font-family:'Special Elite',cursive;font-size:0.8rem;color:var(--smoke);letter-spacing:2px;margin-top:0.2rem}
+.venue-callout .venue-addr{font-family:'Barlow',sans-serif;font-size:0.8rem;color:var(--smoke);letter-spacing:2px;margin-top:0.2rem}
 /* FIRST TIMER */
 .firsttimer{margin-top:2.5rem;background:var(--black);border-left:6px solid var(--teal-bright);padding:2rem 1.5rem;display:flex;flex-direction:column;gap:1.5rem;position:relative;overflow:hidden}
 @media(min-width:700px){.firsttimer{flex-direction:row;align-items:center;gap:2.5rem;padding:2rem 2rem 2rem 2.5rem}}
 .firsttimer::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 0% 50%,rgba(26,148,128,0.12) 0%,transparent 60%);pointer-events:none}
 .firsttimer-text{flex:1;min-width:240px;position:relative;z-index:1}
-.firsttimer-label{font-family:'Special Elite',cursive;font-size:0.7rem;color:var(--teal-light);letter-spacing:4px;margin-bottom:0.5rem}
+.firsttimer-label{font-family:'Barlow',sans-serif;font-size:0.7rem;color:var(--teal-light);letter-spacing:4px;margin-bottom:0.5rem}
 .firsttimer-text h3{font-family:'Bebas Neue',sans-serif;font-size:clamp(1.5rem,3vw,2.1rem);letter-spacing:2px;color:var(--white);line-height:1.05;margin-bottom:0.5rem}
-.firsttimer-text p{font-family:'Special Elite',cursive;font-size:0.82rem;color:var(--smoke-light);line-height:1.75;letter-spacing:0.5px}
+.firsttimer-text p{font-family:'Barlow',sans-serif;font-size:0.82rem;color:var(--smoke-light);line-height:1.75;letter-spacing:0.5px}
 .firsttimer .btn-primary{position:relative;z-index:1;flex-shrink:0;white-space:nowrap}
 /* SEO BLURB */
 .seo-blurb{margin-top:3rem;padding-top:2.5rem;border-top:2px solid rgba(26,148,128,0.15);max-width:780px}
 .seo-blurb h2{font-family:'Bebas Neue',sans-serif;font-size:1.6rem;letter-spacing:2px;color:var(--black);margin-bottom:1rem}
-.seo-blurb p{font-family:'Special Elite',cursive;font-size:0.88rem;line-height:1.9;color:#3a4a48;margin-bottom:0.8rem}
+.seo-blurb p{font-family:'Barlow',sans-serif;font-size:0.88rem;line-height:1.9;color:#3a4a48;margin-bottom:0.8rem}
 .seo-blurb strong{color:var(--teal-dark)}
 /* ABOUT / DRIVERS PAGE HEADER */
 .page-header{
@@ -287,14 +287,14 @@ footer{background:var(--black);border-top:4px solid var(--teal);padding:3rem 2re
   background-position:center 60%;
 }
 .page-header img{display:none}
-.page-header .eyebrow{font-family:'Special Elite',cursive;font-size:0.8rem;color:var(--teal-bright);letter-spacing:5px;margin-bottom:0.75rem;position:relative;z-index:3;text-shadow:0 1px 6px rgba(0,0,0,0.6)}
+.page-header .eyebrow{font-family:'Barlow',sans-serif;font-size:0.8rem;color:var(--teal-bright);letter-spacing:5px;margin-bottom:0.75rem;position:relative;z-index:3;text-shadow:0 1px 6px rgba(0,0,0,0.6)}
 .page-header h1{font-family:'Bebas Neue',sans-serif;font-size:clamp(3rem,9vw,5.5rem);line-height:0.9;color:var(--white);letter-spacing:4px;text-shadow:3px 3px 0 var(--teal-dark),0 4px 24px rgba(0,0,0,0.5);position:relative;z-index:3}
 .page-header h1 span{color:var(--teal-bright)}
 .about-section{max-width:900px;margin:0 auto;padding:3rem 1.25rem}
-.about-section-label{font-family:'Special Elite',cursive;font-size:0.75rem;color:var(--teal);letter-spacing:6px;margin-bottom:0.5rem}
+.about-section-label{font-family:'Barlow',sans-serif;font-size:0.75rem;color:var(--teal);letter-spacing:6px;margin-bottom:0.5rem}
 .about-section-title{font-family:'Bebas Neue',sans-serif;font-size:clamp(2.2rem,5vw,3.5rem);line-height:1;color:var(--black);letter-spacing:3px;margin-bottom:2rem;display:inline-block}
 .about-section-title::after{content:'';display:block;height:4px;width:50%;background:var(--teal);margin-top:0.4rem}
-.prose{font-family:'Special Elite',cursive;font-size:1rem;line-height:1.85;color:#1e2e2c;max-width:700px}
+.prose{font-family:'Barlow',sans-serif;font-size:1rem;line-height:1.85;color:#1e2e2c;max-width:700px}
 .prose p+p{margin-top:1.2rem}
 .prose strong{font-family:'Bebas Neue',sans-serif;font-size:1.2em;letter-spacing:2px;color:var(--black)}
 /* PILLARS */
@@ -305,7 +305,7 @@ footer{background:var(--black);border-top:4px solid var(--teal);padding:3rem 2re
 .pillar:hover{transform:translateY(-4px);box-shadow:0 8px 24px rgba(0,0,0,0.08)}
 .pillar .icon{font-size:2rem;margin-bottom:0.8rem}
 .pillar h3{font-family:'Bebas Neue',sans-serif;font-size:1.3rem;letter-spacing:2px;color:var(--black);margin-bottom:0.5rem}
-.pillar p{font-family:'Special Elite',cursive;font-size:0.82rem;line-height:1.7;color:var(--smoke)}
+.pillar p{font-family:'Barlow',sans-serif;font-size:0.82rem;line-height:1.7;color:var(--smoke)}
 /* AUDIENCE SPLIT */
 .audience-split{display:grid;grid-template-columns:1fr;gap:0;border-top:4px solid var(--teal);border-bottom:4px solid var(--teal)}
 @media(min-width:900px){.audience-split{grid-template-columns:1fr 1fr}}
@@ -317,8 +317,8 @@ footer{background:var(--black);border-top:4px solid var(--teal);padding:3rem 2re
 /* Ray, 8/28: the audience label should be what the eye lands on, with the
    line underneath it as the subtitle. */
 .audience-tag{font-family:'Bebas Neue',sans-serif;font-size:clamp(1.9rem,3.2vw,2.7rem);letter-spacing:3px;color:var(--teal-bright);line-height:1.05;margin-bottom:0.35rem}
-.audience-card h2{font-family:'Special Elite',cursive;font-size:0.95rem;letter-spacing:1px;color:var(--smoke-light);line-height:1.5;margin-bottom:1.25rem;font-weight:400}
-.audience-card p{font-family:'Special Elite',cursive;font-size:0.88rem;line-height:1.85;color:var(--smoke-light);margin-bottom:1.5rem}
+.audience-card h2{font-family:'Barlow',sans-serif;font-size:0.95rem;letter-spacing:1px;color:var(--smoke-light);line-height:1.5;margin-bottom:1.25rem;font-weight:400}
+.audience-card p{font-family:'Barlow',sans-serif;font-size:0.88rem;line-height:1.85;color:var(--smoke-light);margin-bottom:1.5rem}
 .audience-card p strong{color:var(--teal-bright)}
 .audience-list{list-style:none;margin-bottom:2rem}
 .audience-list li{font-family:'Barlow Condensed',sans-serif;font-size:1rem;font-weight:600;color:var(--smoke-light);padding:0.45rem 0;border-bottom:1px solid rgba(255,255,255,0.06);letter-spacing:0.5px}
@@ -336,7 +336,7 @@ footer{background:var(--black);border-top:4px solid var(--teal);padding:3rem 2re
 .expect-card:hover{transform:translateY(-4px);box-shadow:0 8px 24px rgba(0,0,0,0.09)}
 .expect-num{font-family:'Bebas Neue',sans-serif;font-size:3rem;line-height:1;color:var(--teal-bright);opacity:0.35;margin-bottom:0.5rem;letter-spacing:2px}
 .expect-card h3{font-family:'Bebas Neue',sans-serif;font-size:1.3rem;letter-spacing:2px;color:var(--black);margin-bottom:0.6rem}
-.expect-card p{font-family:'Special Elite',cursive;font-size:0.82rem;line-height:1.75;color:var(--smoke)}
+.expect-card p{font-family:'Barlow',sans-serif;font-size:0.82rem;line-height:1.75;color:var(--smoke)}
 /* SEASON BANNER */
 .season-banner{background:var(--black);border-top:4px solid var(--teal);border-bottom:4px solid var(--teal);position:relative;overflow:hidden}
 .season-banner::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 0% 50%,rgba(26,148,128,0.18) 0%,transparent 50%),radial-gradient(ellipse at 100% 50%,rgba(26,148,128,0.12) 0%,transparent 50%);pointer-events:none}
@@ -344,9 +344,9 @@ footer{background:var(--black);border-top:4px solid var(--teal);padding:3rem 2re
 .season-banner-inner{max-width:1100px;margin:0 auto;padding:2.5rem 2rem;display:flex;align-items:center;gap:2rem;position:relative;z-index:1;flex-wrap:wrap}
 .season-icon{font-size:3rem;flex-shrink:0;filter:drop-shadow(0 0 12px rgba(46,216,190,0.4))}
 .season-text{flex:1;min-width:200px}
-.season-label{font-family:'Special Elite',cursive;font-size:0.72rem;color:var(--teal-light);letter-spacing:5px;margin-bottom:0.3rem}
+.season-label{font-family:'Barlow',sans-serif;font-size:0.72rem;color:var(--teal-light);letter-spacing:5px;margin-bottom:0.3rem}
 .season-title{font-family:'Bebas Neue',sans-serif;font-size:clamp(1.8rem,4vw,2.8rem);letter-spacing:3px;color:var(--white);line-height:1}
-.season-sub{font-family:'Special Elite',cursive;font-size:0.82rem;color:var(--smoke);letter-spacing:2px;margin-top:0.4rem}
+.season-sub{font-family:'Barlow',sans-serif;font-size:0.82rem;color:var(--smoke);letter-spacing:2px;margin-top:0.4rem}
 .btn-season{display:inline-block;font-family:'Bebas Neue',sans-serif;font-size:1.05rem;letter-spacing:3px;padding:0.8rem 2rem;background:var(--teal);color:var(--white);border:2px solid var(--teal);text-decoration:none;box-shadow:4px 4px 0 var(--teal-dark);transition:all 0.2s;white-space:nowrap;flex-shrink:0;cursor:pointer}
 .btn-season:hover{background:var(--teal-dark);transform:translate(-2px,-2px);box-shadow:6px 6px 0 var(--teal-dark)}
 /* DUAL CTA */
@@ -357,9 +357,9 @@ footer{background:var(--black);border-top:4px solid var(--teal);padding:3rem 2re
 .dual-cta-half:last-child{border-bottom:none}
 .dual-cta-divider{display:none;background:var(--teal-dark);opacity:0.5}
 @media(min-width:900px){.dual-cta-divider{display:block}}
-.dual-cta-eyebrow{font-family:'Special Elite',cursive;font-size:0.72rem;color:var(--teal-light);letter-spacing:5px;margin-bottom:0.8rem}
+.dual-cta-eyebrow{font-family:'Barlow',sans-serif;font-size:0.72rem;color:var(--teal-light);letter-spacing:5px;margin-bottom:0.8rem}
 .dual-cta-half h2{font-family:'Bebas Neue',sans-serif;font-size:clamp(2.5rem,6vw,4rem);letter-spacing:4px;color:var(--white);line-height:1;margin-bottom:0.8rem}
-.dual-cta-half p{font-family:'Special Elite',cursive;font-size:0.88rem;color:var(--smoke);margin-bottom:2rem;letter-spacing:1px;line-height:1.6}
+.dual-cta-half p{font-family:'Barlow',sans-serif;font-size:0.88rem;color:var(--smoke);margin-bottom:2rem;letter-spacing:1px;line-height:1.6}
 /* DESKTOP */
 @media(min-width:900px){nav{padding:0 2rem}.nav-logo-text{display:flex}.nav-links{gap:2.5rem}.section{padding:5rem 2rem}.about-section{padding:5rem 2rem}}
 /* ============================================================
@@ -381,7 +381,7 @@ footer{background:var(--black);border-top:4px solid var(--teal);padding:3rem 2re
    pair. Sections that hold exactly two cards opt out. */
 @media(min-width:900px){.pillars.cols-2{grid-template-columns:1fr 1fr}}
 .pillar ul{list-style:none;margin-top:0.9rem}
-.pillar li{font-family:'Special Elite',cursive;font-size:0.8rem;line-height:1.65;color:var(--smoke);padding:0.55rem 0 0.55rem 1.05rem;border-bottom:1px solid rgba(10,22,18,0.08);position:relative}
+.pillar li{font-family:'Barlow',sans-serif;font-size:0.8rem;line-height:1.65;color:var(--smoke);padding:0.55rem 0 0.55rem 1.05rem;border-bottom:1px solid rgba(10,22,18,0.08);position:relative}
 .pillar li::before{content:'';position:absolute;left:0;top:1rem;width:5px;height:5px;background:var(--teal-bright)}
 .pillar li:last-child{border-bottom:none;padding-bottom:0}
 .pillar li strong{display:block;font-family:'Bebas Neue',sans-serif;font-size:1.08em;letter-spacing:1px;color:var(--black);margin-bottom:0.1rem}
@@ -390,7 +390,7 @@ footer{background:var(--black);border-top:4px solid var(--teal);padding:3rem 2re
 @media(min-width:760px){.stats-row{grid-template-columns:repeat(4,1fr)}}
 .stat-card{background:var(--white);padding:1.8rem 1rem;text-align:center}
 .stat-num{font-family:'Bebas Neue',sans-serif;font-size:clamp(2.1rem,5vw,3rem);line-height:1;color:var(--teal);letter-spacing:2px}
-.stat-lbl{font-family:'Special Elite',cursive;font-size:0.7rem;letter-spacing:2px;color:var(--smoke);margin-top:0.5rem;line-height:1.45}
+.stat-lbl{font-family:'Barlow',sans-serif;font-size:0.7rem;letter-spacing:2px;color:var(--smoke);margin-top:0.5rem;line-height:1.45}
 /* PARTNERSHIP TIERS */
 .tier-grid{display:grid;grid-template-columns:1fr;gap:1.25rem;margin-top:3rem}
 @media(min-width:640px){.tier-grid{grid-template-columns:1fr 1fr}}
@@ -409,9 +409,9 @@ footer{background:var(--black);border-top:4px solid var(--teal);padding:3rem 2re
 .tier.platinum .tier-head{border-bottom-color:var(--teal-bright)}
 .tier.platinum .tier-name{color:var(--teal-bright)}
 .tier-body{padding:1.3rem;display:flex;flex-direction:column;gap:1.2rem;flex:1}
-.tier-group-label{font-family:'Special Elite',cursive;font-size:0.66rem;letter-spacing:3px;color:var(--teal);margin-bottom:0.4rem}
+.tier-group-label{font-family:'Barlow',sans-serif;font-size:0.66rem;letter-spacing:3px;color:var(--teal);margin-bottom:0.4rem}
 .tier-body ul{list-style:none}
-.tier-body li{font-family:'Special Elite',cursive;font-size:0.78rem;line-height:1.65;color:#2d3d3b;padding:0.5rem 0 0.5rem 1rem;position:relative;border-bottom:1px solid rgba(10,22,18,0.07)}
+.tier-body li{font-family:'Barlow',sans-serif;font-size:0.78rem;line-height:1.65;color:#2d3d3b;padding:0.5rem 0 0.5rem 1rem;position:relative;border-bottom:1px solid rgba(10,22,18,0.07)}
 .tier-body li::before{content:'';position:absolute;left:0;top:0.95rem;width:5px;height:5px;background:var(--teal-bright)}
 .tier-body li:last-child{border-bottom:none;padding-bottom:0}
 /* BENEFIT MATRIX */
