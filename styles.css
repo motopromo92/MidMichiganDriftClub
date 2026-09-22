@@ -409,6 +409,7 @@ footer{background:var(--black);border-top:4px solid var(--teal);padding:3rem 2re
 .tier.platinum .tier-head{border-bottom-color:var(--teal-bright)}
 .tier.platinum .tier-name{color:var(--teal-bright)}
 .tier-body{padding:1.3rem;display:flex;flex-direction:column;gap:1.2rem;flex:1}
+.trackside-photos{display:grid;grid-template-columns:1.5fr 1fr;gap:1rem;margin:0 0 2rem}.trackside-photos figure{margin:0}.trackside-photos img{display:block;width:100%;height:240px;object-fit:cover;border-radius:4px}.trackside-photos figcaption{font-family:'Barlow',sans-serif;font-size:0.8rem;color:var(--smoke);margin-top:0.45rem}@media(max-width:700px){.trackside-photos{grid-template-columns:1fr}.trackside-photos img{height:auto}}
 .tier-group-label{font-family:'Barlow',sans-serif;font-size:0.66rem;letter-spacing:3px;color:var(--teal);margin-bottom:0.4rem}
 .tier-body ul{list-style:none}
 .tier-body li{font-family:'Barlow',sans-serif;font-size:0.78rem;line-height:1.65;color:#2d3d3b;padding:0.5rem 0 0.5rem 1rem;position:relative;border-bottom:1px solid rgba(10,22,18,0.07)}
