@@ -234,6 +234,16 @@ footer{background:var(--black);border-top:4px solid var(--teal);padding:3rem 2re
 .event-spec.none{background:#f1f4f4;color:#5a6a68;border:1px solid rgba(10,22,18,0.16)}
 .event-spec.tbc{background:#fdf6e3;color:#7a5c00;border:1px solid rgba(160,125,0,0.3)}
 /* EARLIER IN THE SEASON */
+.offseason{background:var(--black);border-left:6px solid var(--teal-bright);padding:2rem 1.5rem;display:flex;flex-direction:column;gap:1.5rem;position:relative;overflow:hidden}
+@media(min-width:800px){.offseason{flex-direction:row;align-items:center;gap:2.5rem;padding:2.25rem 2.5rem}}
+.offseason::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 0% 50%,rgba(26,148,128,0.14) 0%,transparent 60%);pointer-events:none}
+.offseason-text{flex:1;min-width:240px;position:relative;z-index:1}
+.offseason-label{font-family:'Barlow',sans-serif;font-size:0.7rem;color:var(--teal-light);letter-spacing:4px;margin-bottom:0.5rem;text-transform:uppercase}
+.offseason-text h3{font-family:'Bebas Neue',sans-serif;font-size:clamp(1.8rem,4vw,2.6rem);letter-spacing:2px;color:var(--white);line-height:1.05;margin-bottom:0.6rem}
+.offseason-text p{font-family:'Barlow',sans-serif;font-size:0.88rem;color:var(--smoke-light);line-height:1.75;letter-spacing:0.3px;max-width:56ch}
+.offseason-links{display:flex;flex-wrap:wrap;gap:0.75rem;position:relative;z-index:1}
+.offseason-links .btn{flex:1 1 auto;text-align:center;padding:0.7rem 0.9rem;font-size:1rem;letter-spacing:2px}
+@media(min-width:800px){.offseason-links{flex-direction:column;flex-shrink:0}.offseason-links .btn{flex:none;padding:0.75rem 2.2rem;font-size:1.1rem;letter-spacing:3px;min-width:11rem}}
 .past-season{margin-top:2.75rem;border-top:2px solid rgba(26,148,128,0.2);padding-top:1.6rem}
 .past-season h3{font-family:'Bebas Neue',sans-serif;font-size:1.4rem;letter-spacing:2px;color:var(--black)}
 .past-intro{font-family:'Barlow Condensed',sans-serif;font-size:0.9rem;color:#5a6a68;margin:0.35rem 0 1rem;max-width:60ch}
